@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Email;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,7 +24,7 @@ class Template extends Model
      * @var array
      */
     protected $fillable = [
-        'nom', 'subject', 'mobile', 'web', 'email', 'telephone', 'adresse','logo', 'created_at', 'updated_at',
+        'nom', 'subject', 'mobile', 'web', 'email', 'telephone', 'adresse','logo', 'created_at', 'updated_at','user_id',
     ];
 
     /**
@@ -39,4 +40,9 @@ class Template extends Model
     {
         return $this->hasMany(Email::class);
     }
+
+    public function user()
+  {
+      return $this->belongsTo(User::class);
+  }
 }

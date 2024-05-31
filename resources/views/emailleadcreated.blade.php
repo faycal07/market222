@@ -19,7 +19,7 @@
 
             <!-- Subject Section -->
             <div class="subject-section bg-blue-600 py-6 text-center text-white">
-                <h2 class="text-3xl font-bold tracking-wide">Bienvenue!</h2>
+                <h2 class="text-3xl font-bold tracking-wide">Bienvenue {{ $lead->nom }} !</h2>
             </div>
 
             <!-- Image Section -->

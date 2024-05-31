@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,272 +22,194 @@
 <body>
 
     @include('navbar')
-	<div class="main-container">
+	<div class="main-container sm:flex md:flex">
 		@include('sidebar')
+        <div class="main">
+            <nav class="bg-sky-950 p-2 shadow-md mb-5 rounded-2xl">
+                <div class="container mx-auto flex flex-wrap items-center justify-between">
+                    <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
 
+                        <img src="{{asset('/images/menutel.png')}}" alt="menu" class="w-6 h-6">
+                    </button>
 
-		<div class="main">
+                    @php
+                    $user_role = auth()->user()->role;
+                @endphp
 
+                <div class="hidden w-full lg:flex lg:flex-col lg:flex-grow lg:w-auto px-3" id="nav-contenttt" data-user-role="{{ $user_role }}">
+                    <div class="lg:inline-flex lg:flex-row lg:items-stretch lg:ml-1 lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+                        <a href="#userSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Utilisateurs</a>
+                        <a href="#userSectionarchiver" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Archives</a>
+                        <a href="#opportunitySection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Opportunités</a>
+                        <a href="#leadSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Leads</a>
+                        <a href="#compagneSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Compagnes</a>
+                        <a href="#workflowSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Workflows</a>
+                        <a href="#productSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Produits</a>
+                        <a href="#Statistiques" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Statistiques</a>
+                    </div>
+                    <div class="lg:inline-flex lg:flex-row lg:items-stretch lg:ml-1 lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+                        <a href="#leadChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Leads</a>
+                        <a href="#stagesChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Stages</a>
+                        <a href="#compagnesChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Compagne</a>
+                        <a href="#productsChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Produits</a>
+                        <a href="#productLeadsChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Produits Demandé</a>
+                        <a href="#emailsChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe E-Mail</a>
+                    </div>
+                </div>
 
+                </div>
+            </nav>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
-                <!-- Première carte -->
-                <div class="bg-white rounded-lg shadow-md">
-                    <!-- Contenu de la carte -->
-                    <h2 class="text-lg font-semibold text-center py-4">Graphique d'utilisateurs</h2>
+            @php
+            $user_role = auth()->user()->role;
+        @endphp
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5" id="chartContainer" data-user-role="{{ $user_role }}">
+            @foreach([
+                ['title' => 'Graphique d\'utilisateurs', 'id' => 'userChart'],
+                ['title' => 'Graphique des roles', 'id' => 'userRoleChart'],
+                ['title' => 'Graphique des leads', 'id' => 'leadChart'],
+                ['title' => 'Graphique des stages des leads', 'id' => 'stagesChart'],
+                ['title' => 'Graphique des compagnes marketing', 'id' => 'compagnesChart'],
+                ['title' => 'Graphique des produits', 'id' => 'productsChart'],
+                ['title' => 'Graphique des produits selon la demande', 'id' => 'productLeadsChart'],
+                ['title' => 'Graphique des emails', 'id' => 'emailsChart'],
+            ] as $chart)
+                <div class="bg-white rounded-lg shadow-md chart-item" data-chart-id="{{ $chart['id'] }}">
+                    <h2 class="text-lg font-semibold text-center py-4">{{ $chart['title'] }}</h2>
                     <div class="h-72">
-                        <canvas id="userChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
+                        <canvas id="{{ $chart['id'] }}" class="w-full h-full"></canvas>
                     </div>
                 </div>
+            @endforeach
+        </div>
 
-                <!-- Deuxième carte -->
-                <div class="bg-white rounded-lg shadow-md">
-                    <!-- Contenu de la carte -->
-                    <h2 class="text-lg font-semibold text-center py-4">Graphique des roles</h2>
-                    <div class="h-72">
-                        <canvas id="userRoleChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
+            <div class="box-container" id="Statistiques">
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <div class="box">
+                        <div class="text">
+                            <h2 class="topic-heading">{{ DB::table('users')->count() }}</h2>
+                            <h2 class="topic">Utilisateurs</h2>
+                        </div>
+                        <img src="images/users.png" alt="Utilisateurs">
                     </div>
-                </div>
-                  <!-- Deuxième carte -->
-                  <div class="bg-white rounded-lg shadow-md">
-                    <!-- Contenu de la carte -->
-                    <h2 class="text-lg font-semibold text-center py-4">Graphique des leads</h2>
-                    <div class="h-72">
-                        <canvas id="leadChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
+                @endif
+
+                @foreach([
+                    ['title' => 'Opportunitées', 'count' => DB::table('opportunites')->count(), 'image' => 'opportunites.png'],
+                    ['title' => 'Les types des Leads', 'count' => DB::table('lead_types')->count(), 'image' => 'typeslead.png'],
+                    ['title' => 'Les Stages d\'une opportunitée', 'count' => DB::table('stages')->count(), 'image' => 'stages.png'],
+                    ['title' => 'Les sources des leads', 'count' => DB::table('lead_sources')->count(), 'image' => 'sources.png'],
+                    ['title' => 'Leads', 'count' => DB::table('leads')->count(), 'image' => 'leads.png'],
+                    ['title' => 'Compagnes Marketinges', 'count' => DB::table('compagnes')->count(), 'image' => 'compagnes.png'],
+                    ['title' => 'Produits', 'count' => DB::table('products')->count(), 'image' => 'produits.png'],
+                    ['title' => 'Workflows', 'count' => DB::table('workflows')->count(), 'image' => 'workflow.png'],
+                ] as $box)
+                <div class="box">
+                    <div class="text">
+                        <h2 class="topic-heading">{{ $box['count'] }}</h2>
+                        <h2 class="topic">{{ $box['title'] }}</h2>
                     </div>
+                    <img src="images/{{ $box['image'] }}" alt="{{ $box['title'] }}">
                 </div>
+                @endforeach
+            </div>
 
-            <!-- Deuxième carte -->
-            <div class="bg-white rounded-lg shadow-md">
-              <!-- Contenu de la carte -->
-              <h2 class="text-lg font-semibold text-center py-4">Graphique des stages des leads  </h2>
-              <div class="h-72">
-                  <canvas id="stagesChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
-              </div>
-          </div>
-          <div class="bg-white rounded-lg shadow-md">
-            <!-- Contenu de la carte -->
-            <h2 class="text-lg font-semibold text-center py-4">Graphique des compagnes marketing</h2>
-            <div class="h-72">
-                <canvas id="compagnesChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
+
+            @php
+    $user_role = auth()->user()->role;
+@endphp
+
+<div class="report-container" id="userSection" data-user-role="{{ $user_role }}">
+    <div class="report-header">
+        <h1 class="recent-Articles text-xl font-semibold">Liste des Utilisateurs Non Archivés</h1>
+        <div class="bg-white p-4 rounded-lg">
+            <div class="relative bg-inherit">
+                <input type="search" id="userSearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                <label for="userSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md">
-            <!-- Contenu de la carte -->
-            <h2 class="text-lg font-semibold text-center py-4">Graphique des produits</h2>
-            <div class="h-72">
-                <canvas id="productsChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
+    </div>
+    <div class="report-body">
+        <div class="overflow-x-auto shadow-md sm:rounded-lg my-5">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-800">
+                <thead class="text-xs bg-gray-200 dark:bg-cyan-900">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Id</th>
+                        <th scope="col" class="px-6 py-3">Nom</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Role</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    @php
+                        $users = DB::table('users')->where('archiver', 'non')->get();
+                    @endphp
+                    @foreach($users as $user)
+                        <tr class="border-b even:bg-gray-100 odd:bg-gray-200 user-item">
+                            <td class="px-6 py-4 font-medium">{{ $user->id }}</td>
+                            <td class="px-6 py-4">{{ $user->name }}</td>
+                            <td class="px-6 py-4">{{ $user->email }}</td>
+                            <td class="px-6 py-4">{{ $user->role }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="report-container" id="userSectionarchiver" data-user-role="{{ $user_role }}">
+    <div class="report-header">
+        <h1 class="recent-Articles text-xl font-semibold">Liste des Utilisateurs Archivés</h1>
+        <div class="bg-white p-4 rounded-lg">
+            <div class="relative bg-inherit">
+                <input type="search" id="archivedUserSearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                <label for="archivedUserSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md">
-            <!-- Contenu de la carte -->
-            <h2 class="text-lg font-semibold text-center py-4">Graphique des produits selon la demande </h2>
-            <div class="h-72">
-                <canvas id="productLeadsChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
-            </div>
+    </div>
+    <div class="report-body">
+        <div class="overflow-x-auto shadow-md sm:rounded-lg my-5">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-800">
+                <thead class="text-xs bg-gray-200 dark:bg-cyan-900">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Id</th>
+                        <th scope="col" class="px-6 py-3">Nom</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Role</th>
+                    </tr>
+                </thead>
+                <tbody id="archivedUserTableBody">
+                    @php
+                        $users = DB::table('users')->where('archiver', 'oui')->get();
+                    @endphp
+                    @foreach($users as $user)
+                        <tr class="border-b even:bg-gray-100 odd:bg-gray-200 archived-user-item">
+                            <td class="px-6 py-4 font-medium">{{ $user->id }}</td>
+                            <td class="px-6 py-4">{{ $user->name }}</td>
+                            <td class="px-6 py-4">{{ $user->email }}</td>
+                            <td class="px-6 py-4">{{ $user->role }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
+</div>
 
-        <div class="bg-white rounded-lg shadow-md">
-            <!-- Contenu de la carte -->
-            <h2 class="text-lg font-semibold text-center py-4">Graphique des emails</h2>
-            <div class="h-72">
-                <canvas id="emailsChart" class="w-full h-full"></canvas> <!-- Canvas prenant toute la taille de la carte -->
-            </div>
-        </div>
-
-
-
-
-
-        </div>
-
-
-			<div class="box-container">
-
-				<div class="box box1">
-					<div class="text">
-                        @php
-                         // Compter le nombre d'utilisateurs
-                         $nombreUtilisateurs = DB::table('users')->count();
-                         @endphp
-						<h2 class="topic-heading">{{ $nombreUtilisateurs }}</h2>
-						<h2 class="topic">Utilisateurs</h2>
-					</div>
-
-					<img src="images/users.png"
-						alt="users">
-				</div>
-
-				<div class="box box2">
-					<div class="text">
-                        @php
-                        $nombreopportunites = DB::table('opportunites')->count();
-                         @endphp
-						<h2 class="topic-heading">{{$nombreopportunites}}</h2>
-						<h2 class="topic">Opportunitées</h2>
-					</div>
-
-					<img src="images/opportunites.png"
-						alt="opportunies">
-				</div>
-
-                <div class="box box3">
-					<div class="text">
-                        @php
-                        $types= DB::table('lead_types')->count();
-                        @endphp
-						<h2 class="topic-heading">{{$types}}</h2>
-						<h2 class="topic">les types des Leads</h2>
-					</div>
-
-
-
-					<img src="/images/typeslead.png"
-						alt="comments">
-				</div>
-                <div class="box box4">
-					<div class="text">
-                        @php
-                        $stagesnbr= DB::table('stages')->count();
-                        @endphp
-						<h2 class="topic-heading">{{$stagesnbr}}</h2>
-						<h2 class="topic">Les Stages d'une opportunitée</h2>
-					</div>
-
-
-
-					<img src="/images/stages.png"
-						alt="comments">
-				</div>
-                <div class="box box5">
-					<div class="text">
-                        @php
-                        $sources = DB::table('lead_sources')->count();
-                        @endphp
-						<h2 class="topic-heading">{{$sources}}</h2>
-						<h2 class="topic">Les sources des leads</h2>
-					</div>
-
-					<img src="/images/sources.png"
-						alt="likes">
-				</div>
-
-				<div class="box box6">
-					<div class="text">
-                        @php
-                        $nombreleads= DB::table('leads')->count();
-                         @endphp
-						<h2 class="topic-heading">{{$nombreleads}}</h2>
-						<h2 class="topic">Leads</h2>
-					</div>
-
-					<img src="images/leads.png"
-						alt="leads">
-				</div>
-
-				<div class="box box7">
-					<div class="text">
-                        @php
-                        $nombrecompagnes= DB::table('compagnes')->count();
-                         @endphp
-						<h2 class="topic-heading">{{$nombrecompagnes}}</h2>
-						<h2 class="topic">Compagnes Marketinges</h2>
-					</div>
-
-					<img src="images/compagnes.png" alt="published">
-				</div>
-                <div class="box box8">
-					<div class="text">
-                        @php
-                        $nombreproduct = DB::table('products')->count();
-                         @endphp
-						<h2 class="topic-heading">{{$nombreproduct}}</h2>
-						<h2 class="topic">Produits</h2>
-					</div>
-
-					<img src="images/produits.png" alt="published">
-				</div>
-			</div>
-
-            <div class="report-container">
+            <div class="report-container" id="productSection">
                 <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des Utilisateurs Non Archivés</h1>
-                    <input type="text" id="userSearchInput" placeholder="Rechercher par mot">
-                </div>
+                    <h1 class="recent-Articles text-xl font-semibold">Liste des Produits</h1>
 
-                <div class="report-body">
-                    <div class="overflow-x-auto shadow-md sm:rounded-lg my-5">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-800">
-                            <thead class="text-xs bg-gray-200 dark:bg-cyan-900">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Id</th>
-                                    <th scope="col" class="px-6 py-3">Nom</th>
-                                    <th scope="col" class="px-6 py-3">Email</th>
-                                    <th scope="col" class="px-6 py-3">Role</th>
-                                </tr>
-                            </thead>
-                            <tbody id="userTableBody">
-                                @php
-                                    $users = DB::table('users')->where('archiver', 'non')->get();
-                                @endphp
-                                @foreach($users as $user)
-                                    <tr class="border-b even:bg-gray-100 odd:bg-gray-200 user-item">
-                                        <td class="px-6 py-4 font-medium">{{ $user->id }}</td>
-                                        <td class="px-6 py-4">{{ $user->name }}</td>
-                                        <td class="px-6 py-4">{{ $user->email }}</td>
-                                        <td class="px-6 py-4">{{ $user->role }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="productSearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="productSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-
-
-
-            <div class="report-container">
-                <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des Utilisateurs Archivés</h1>
-                    <input type="text" id="archivedUserSearchInput" placeholder="Rechercher par mot">
-                </div>
-
-                <div class="report-body">
-                    <div class="overflow-x-auto shadow-md sm:rounded-lg my-5">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-800">
-                            <thead class="text-xs bg-gray-200 dark:bg-cyan-900">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Id</th>
-                                    <th scope="col" class="px-6 py-3">Nom</th>
-                                    <th scope="col" class="px-6 py-3">Email</th>
-                                    <th scope="col" class="px-6 py-3">Role</th>
-                                </tr>
-                            </thead>
-                            <tbody id="archivedUserTableBody">
-                                @php
-                                    $users = DB::table('users')->where('archiver', 'oui')->get();
-                                @endphp
-                                @foreach($users as $user)
-                                    <tr class="border-b even:bg-gray-100 odd:bg-gray-200 archived-user-item">
-                                        <td class="px-6 py-4 font-medium">{{ $user->id }}</td>
-                                        <td class="px-6 py-4">{{ $user->name }}</td>
-                                        <td class="px-6 py-4">{{ $user->email }}</td>
-                                        <td class="px-6 py-4">{{ $user->role }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="report-container">
-                <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des Produits</h1>
-                    <input type="text" id="productSearchInput" placeholder="Rechercher par mot">
                 </div>
 
                 <div class="report-body">
@@ -326,10 +249,19 @@
 
 
 
-            <div class="report-container">
+            <div class="report-container" id="opportunitySection">
                 <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des Opportunités</h1>
-                    <input type="text" id="opportunitySearchInput" placeholder="Rechercher par mot">
+                    <h1 class="recent-Articles text-xl font-semibold">Liste des Opportunités</h1>
+
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="opportunitySearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="opportunitySearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="report-body">
@@ -372,10 +304,19 @@
             </div>
 
 
-            <div class="report-container">
+            <div class="report-container" id="leadSection">
                 <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des leads</h1>
-                    <input type="text" id="leadSearchInput" placeholder="Rechercher par mot">
+                    <h1 class="recent-Articles text-xl font-semibold ">Liste des leads</h1>
+
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="leadSearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="leadSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="report-body">
@@ -459,10 +400,20 @@
             </div>
 
 
-            <div class="report-container">
+            <div class="report-container" id="workflowSection">
                 <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des Workflows</h1>
-                    <input type="text" id="workflowSearchInput" placeholder="Rechercher par mot">
+                    <h1 class="recent-Articles text-xl font-semibold">Liste des Workflows</h1>
+
+
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="workflowSearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="workflowSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="report-body">
@@ -495,10 +446,21 @@
                 </div>
             </div>
 
-            <div class="report-container">
+            <div class="report-container" id="compagneSection">
                 <div class="report-header">
-                    <h1 class="recent-Articles text-xl font-semibold mb-4">Liste des Compagnes</h1>
-                    <input type="text" id="compagneSearchInput" placeholder="Rechercher par mot">
+                    <h1 class="recent-Articles text-xl font-semibold ">Liste des Compagnes</h1>
+
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="compagneSearchInput" name="username" class=" peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="compagneSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
 
                 <div class="report-body">
@@ -538,6 +500,7 @@
 
 		</div>
 	</div>
+
     <script>
         // Récupérer les données des graphiques des utilisateurs et des leads passées par le contrôleur
         var userChartLabels = {!! json_encode($userChart['labels']) !!};

@@ -67,6 +67,12 @@
 							<option value="inactive">inactive</option>
 
 						</select>
+                        @error('status')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Champs pour le choix des d'evenement  -->
@@ -79,6 +85,12 @@
 							<option value="3">envoyer un email de remercement pour lead won</option>
 							<option value="4">envoyer un email de remercement pour lead lost </option>
 						</select>
+                        @error('event')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 

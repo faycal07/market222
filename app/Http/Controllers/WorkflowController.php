@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use auth;
 use App\Models\Workflow;
 use App\Events\LeadCreated;
 use Illuminate\Http\Request;
@@ -40,12 +41,16 @@ class WorkflowController extends Controller
         'name' => 'required|string',
         'event' => 'required|string', // Ajouter "LeadCreated" à la liste des valeurs autorisées
     ]);
+
     try {
+
+        $user_id = auth()->id();
     // Créer le workflow en utilisant les données du formulaire
     $workflow = Workflow::create([
         'name' => $request->input('name'),
         'event' => $request->input('event'),
         'status' => 'active', // Statut par défaut à la création
+        'user_id'=>$user_id,
     ]);
 
 

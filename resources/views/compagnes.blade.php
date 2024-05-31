@@ -14,23 +14,6 @@
 
 
 
-    <style>
-        #social-links ul li{
-        display: inline-block;}
-
-        #social-links ul li a{
-        padding: 20px;
-        margin: 2px;
-        font-size: 30px;
-        color: rgb(46,41,114);
-        background-color: #ccc};
-
-        #social-links ul li a:hover{
-            background-color:rgb(46,41,114);
-            color:white;
-        }
-        </style>
-
 </head>
 
 <body>
@@ -51,6 +34,12 @@
             </div>
             @endif
 
+            @if (session('test'))
+    <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
+        {{ session('test') }}
+    </div>
+@endif
+
             @if (session('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
@@ -59,9 +48,11 @@
 
 				<div class="box box1">
 					<div class="text">
-                        @php
-                    $nbrcompagens= DB::table('compagnes')->count();
-                     @endphp
+
+                      @php
+                      $user_id = auth()->id();
+                      $nbrcompagens= DB::table('compagnes')->where('user_id', $user_id)->count();
+                      @endphp
 						<h2 class="topic-heading">{{$nbrcompagens}}</h2>
 						<h2 class="topic">Compagnes</h2>
 					</div>
@@ -69,51 +60,27 @@
 					<img src= "/images/compagnes.png"
 						alt="Views">
 				</div>
-
-				<div class="box box2">
-					<div class="text">
-						<h2 class="topic-heading">150</h2>
-						<h2 class="topic">Likes</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
-						alt="likes">
-				</div>
-
-				<div class="box box3">
-					<div class="text">
-						<h2 class="topic-heading">320</h2>
-						<h2 class="topic">Comments</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-						alt="comments">
-				</div>
-
-				<div class="box box4">
-					<div class="text">
-						<h2 class="topic-heading">70</h2>
-						<h2 class="topic">Published</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
-				</div>
 			</div>
 
 
 
 
 
-			<div class="report-container">
+			<div class="report-container min-w-full">
                 <div class="report-header">
                     <h1 class="recent-Articles">Liste des Compagnes</h1>
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="compagneSearchInput" name="username" class=" me-16 peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="compagneSearchInput" onkeyup="searchLeads()" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
                     <span class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800">
                         <a href="{{ route('compagnes.index') }}#user-form" onclick="scrollToForm()">Créer Compagne</a>
                     </span>
-                    <input type="text" id="compagneSearchInput" placeholder="Rechercher..." class="mt-3 px-3 py-2 border rounded-md">
+
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
                     <table class="w-full text-sm text-left rtl:text-right text-slate-800 dark:text-slate-800">
@@ -130,67 +97,54 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $leads = DB::table('leads')->get();
-                                $compagnes = DB::table('compagnes')->get();
-                            @endphp
                             @foreach ($compagnes as $compagne)
-                                <tr class="compagne-item border-b even:bg-slate-300 odd:bg-slate-400">
-                                    <td class="px-6 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-cyan-800">{{ $compagne->id }}</td>
-                                    <td class="px-6 py-1">{{ $compagne->title }}</td>
-                                    <td class="px-6 py-1">{{ $compagne->text_compagne }}</td>
-                                    <td class="px-6 py-1">{{ $compagne->slogan }}</td>
-                                    <td class="px-6 py-1">
-                                        <ol>
-                                            @php
-                                                $leadNames = [];
-                                                $leadIds = DB::table('compagne_lead')->where('compagne_id', $compagne->id)->pluck('lead_id')->toArray();
-                                                foreach ($leadIds as $leadId) {
-                                                    $lead = $leads->firstWhere('id', $leadId);
-                                                    if ($lead) {
-                                                        $leadNames[] = $lead->nom;
-                                                    }
-                                                }
-                                                echo implode(', ', $leadNames);
-                                            @endphp
-                                        </ol>
-                                    </td>
-                                    <td class="px-6 py-1">{{ $compagne->date_limite }}</td>
-                                    <td class="px-3 py-1"><img src="{{ Storage::url($compagne->image) }}" alt="{{ $compagne->title }}" class="h-20 w-20"></td>
-                                    <td class="ps-3 py-1">
-                                        <span class="inline-flex rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('modifiercompagne.index', ['id' => $compagne->id]) }}" class="accepter">
-                                                <img src="/images/editer.png" alt="editer">
-                                            </a>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-red-900 hover:text-slate-400">
-                                            <button onclick="openDeleteModal('{{ route('deletecompagne', ['id' => $compagne->id]) }}')">
-                                                <img src="/images/supprimer.png" alt="supprimer">
-                                            </button>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('email.envoyer', ['id' => $compagne->id]) }}" class="btn btn-send">
-                                                <img src="/images/email.png" alt="editer">
-                                            </a>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('sms.envoyer', ['id' => $compagne->id]) }}" class="btn btn-send">
-                                                <img src="/images/sms.png" alt="editer">
-                                            </a>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('compagnes.share', ['id' => $compagne->id]) }}">
-                                                <img src="/images/partage.png" alt="">
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
+                            <tr class="compagne-item border-b even:bg-slate-300 odd:bg-slate-400">
+                                <td class="px-6 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-cyan-800">{{ $compagne->id }}</td>
+                                <td class="px-6 py-1">{{ $compagne->title }}</td>
+                                <td class="px-6 py-1">{{ $compagne->text_compagne }}</td>
+                                <td class="px-6 py-1">{{ $compagne->slogan }}</td>
+                                <td class="px-6 py-1">
+                                    <ol>
+                                        @foreach ($compagne->leads as $lead)
+                                        <li>{{ $lead->nom }}</li>
+                                        @endforeach
+                                    </ol>
+                                </td>
+                                <td class="px-6 py-1">{{ $compagne->date_limite }}</td>
+                                <td class="px-3 py-1"><img src="{{ Storage::url($compagne->image) }}" alt="{{ $compagne->title }}" class="h-20 w-20"></td>
+                                <td class="ps-3 py-1">
+                                    <span class="inline-flex rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
+                                        <a href="{{ route('modifiercompagne.index', ['id' => $compagne->id]) }}" class="accepter">
+                                            <img src="/images/editer.png" alt="editer">
+                                        </a>
+                                    </span>
+                                    <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-red-900 hover:text-slate-400">
+                                        <button onclick="openDeleteModal('{{ route('deletecompagne', ['id' => $compagne->id]) }}')">
+                                            <img src="/images/supprimer.png" alt="supprimer">
+                                        </button>
+                                    </span>
+                                    <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
+                                        <a href="{{ route('email.envoyer', ['id' => $compagne->id]) }}" class="btn btn-send">
+                                            <img src="/images/email.png" alt="editer">
+                                        </a>
+                                    </span>
+                                    <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
+                                        <a href="{{ route('sms.envoyer', ['id' => $compagne->id]) }}" class="btn btn-send">
+                                            <img src="/images/sms.png" alt="editer">
+                                        </a>
+                                    </span>
+                                    <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
+                                        <a href="{{ route('compagnes.share', ['id' => $compagne->id]) }}">
+                                            <img src="/images/partage.png" alt="">
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <!-- Modal de confirmation de suppression -->
             <div id="deleteModal" tabindex="-1" aria-hidden="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
                 <div class="bg-white rounded-lg shadow dark:bg-gray-800 max-w-md p-6">
@@ -223,46 +177,61 @@
 					<!-- Titre de la compagne -->
 					<div class="mb-5">
 						<label for="compagne_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Titre de la Compagne</label>
-						<input type="text" id="compagne_title" name="compagne_title" placeholder="Titre de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-						@error('compagne_title')
-						<span class="error">{{ $message }}</span>
-						@enderror
+						<input type="text" id="compagne_title" name="compagne_title"   required placeholder="Titre de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('compagne_title')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Slogan de la compagne -->
 					<div class="mb-5">
 						<label for="compagne_slogan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Slogan de la Compagne</label>
-						<input type="text" id="compagne_slogan" name="compagne_slogan" placeholder="Slogan de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+						<input type="text" id="compagne_slogan" name="compagne_slogan"  required  placeholder="Slogan de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
 						@error('compagne_slogan')
-						<span class="error">{{ $message }}</span>
-						@enderror
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Texte de la compagne -->
 					<div class="mb-5">
 						<label for="text_compagne" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Texte de la Compagne</label>
-						<textarea id="text_compagne" name="text_compagne" rows="4" placeholder="Texte de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
+						<textarea id="text_compagne" name="text_compagne"   required rows="4" placeholder="Texte de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
 						@error('text_compagne')
-						<span class="error">{{ $message }}</span>
-						@enderror
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Image de la compagne -->
 					<div class="mb-5">
 						<label for="compagne_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Image</label>
-						<input type="file" id="compagne_image" name="compagne_image" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+						<input type="file" id="compagne_image" name="compagne_image"  required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
 						@error('compagne_image')
-						<span class="error">{{ $message }}</span>
-						@enderror
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Date de création de la compagne -->
 					<div class="mb-5">
 						<label for="compagne_date_limite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Date Limite</label>
-						<input type="date" id="compagne_date_limite" name="compagne_date_limite" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-						@error('compagne_date_limite')
-						<span class="error">{{ $message }}</span>
-						@enderror
+						<input type="date" id="compagne_date_limite"   required name="compagne_date_limite" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('compagne_date_limite')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Champs pour le choix des leads -->
@@ -278,13 +247,19 @@
 							<option value="lead_types">Types de Leads</option>
 							<option value="all_leads">Tous les Leads</option>
 						</select>
+                        @error('lead_option')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Champs conditionnels en fonction de l'option sélectionnée -->
 
 					<div class="mb-5 conditional-field" id="source-id-condition" style="display: none;">
 						<label for="source_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner la source de lead</label>
-						<select id="source_id" name="source_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+						<select id="source_id" name="source_id"   required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
 							@php
 							//
 							$sources = DB::table('lead_sources')->get();
@@ -293,6 +268,12 @@
 							<option value="{{$source->id}}">{{$source->name}}</option>
 							@endforeach
 						</select>
+                        @error('source_id')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 
@@ -322,6 +303,7 @@
 										   <option value="{{$type->id}}">{{$type->nom}}</option>
 										@endforeach
 									   </select>
+
 
 								  </div>
 
