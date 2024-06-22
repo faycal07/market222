@@ -324,7 +324,11 @@
 											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 											placeholder="Nom de Lead">
                                             @error('nom')
+<<<<<<< HEAD
                                             <div class="text-red-500 text-sm">
+=======
+                                            <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                                 {{$message}}
                                             </div>
 
@@ -336,7 +340,11 @@
 											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 											placeholder="E-Mail">
                                             @error('email')
+<<<<<<< HEAD
                                             <div class="text-red-500 text-sm">
+=======
+                                            <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                                 {{$message}}
                                             </div>
 
@@ -348,7 +356,11 @@
 											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 											placeholder="Téléphone">
                                             @error('tel')
+<<<<<<< HEAD
                                             <div class="text-red-500 text-sm">
+=======
+                                            <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                                 {{$message}}
                                             </div>
 
@@ -363,7 +375,11 @@
 											<option value="2">Nouveau</option>
 										</select>
                                         @error('types_id')
+<<<<<<< HEAD
                                         <div class="text-red-500 text-sm">
+=======
+                                        <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                             {{$message}}
                                         </div>
 
@@ -380,7 +396,11 @@
 											<option value="5">Formulaire</option>
 										</select>
                                         @error('sources_id')
+<<<<<<< HEAD
                                         <div class="text-red-500 text-sm">
+=======
+                                        <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                             {{$message}}
                                         </div>
 
@@ -395,7 +415,11 @@
 											@endforeach
 										</select>
                                         @error('produit_id')
+<<<<<<< HEAD
                                         <div class="text-red-500 text-sm">
+=======
+                                        <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                             {{$message}}
                                         </div>
 
@@ -410,7 +434,11 @@
 											@endforeach
 										</select>
                                         @error('opportunite_id')
+<<<<<<< HEAD
                                         <div class="text-red-500 text-sm">
+=======
+                                        <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                             {{$message}}
                                         </div>
 

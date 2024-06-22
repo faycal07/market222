@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email de Notification de Lead Perdu</title>
+<<<<<<< HEAD
     <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
+=======
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 </head>
 <body style="background-color: #f9fafb; padding: 20px; font-family: Arial, sans-serif;">
 

@@ -18,7 +18,11 @@
                 <h3>Emails</h3>
             </a>
 
+<<<<<<< HEAD
             {{-- @if(auth()->check() && auth()->user()->role === 'marketing') --}}
+=======
+            @if(auth()->check() && auth()->user()->role === 'marketing')
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                 <a href="{{ route('opportunites.index') }}" class="nav-option">
                     <i class="fas fa-tasks fa-flip px-2" style="--fa-animation-duration: 10s;"></i>
                     <h3>Opportunités</h3>
@@ -38,7 +42,11 @@
                     <i class="fa-solid fa-timeline px-2 fa-flip" style="--fa-animation-duration: 10s;"></i>
                     <h3>Workflows</h3>
                 </a>
+<<<<<<< HEAD
             {{-- @endif --}}
+=======
+            @endif
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

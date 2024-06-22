@@ -40,7 +40,11 @@
                                     <input type="text" id="nom" name="nom" required value="{{$template->nom}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
 
                                     @error('nom')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 
@@ -51,7 +55,11 @@
                                     <label for="subject" class="text-sm font-medium mb-1">Objet du template :</label>
                                     <input type="text" id="subject" name="subject" required value="{{$template->subject}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                     @error('subject')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 
@@ -62,7 +70,11 @@
                                     <label for="mobile" class="text-sm font-medium mb-1">Contenu mobile du template :</label>
                                     <input type="text" id="mobile" name="mobile" required value="{{$template->mobile}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                     @error('mobile')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 
@@ -73,7 +85,11 @@
                                     <label for="web" class="text-sm font-medium mb-1">Contenu web du template :</label>
                                     <input type="text" id="web" name="web" required value="{{$template->web}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                     @error('web')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 
@@ -84,7 +100,11 @@
                                     <label for="email" class="text-sm font-medium mb-1">E-mail :</label>
                                     <input type="email" id="email" name="email" required value="{{$template->email}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                     @error('email')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 
@@ -95,7 +115,11 @@
                                     <label for="telephone" class="text-sm font-medium mb-1">Contenu téléphone du template :</label>
                                     <input type="text" id="telephone" name="telephone" required value="{{$template->telephone}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                     @error('telephone')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 
@@ -106,7 +130,11 @@
                                     <label for="adresse" class="text-sm font-medium mb-1">Contenu adresse du template :</label>
                                     <input type="text" id="adresse" name="adresse" required value="{{$template->adresse}}" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                     @error('adresse')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 

@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Fonction pour faire défiler jusqu'au formulaire d'utilisateur
 function scrollToForm() {
+<<<<<<< HEAD
     const formElement = document.getElementById('user-form');
     formElement.scrollIntoView({ behavior: 'smooth' });
     formElement.classList.remove('hidden');
@@ -59,6 +60,12 @@ function scrollToForm() {
 
 
 
+=======
+    document.getElementById('user-form').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('user-form').classList.remove('hidden');
+}
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 // Fonction pour revenir au début et masquer le formulaire d'utilisateur
 function scrollToStart() {
     document.getElementById('main').scrollIntoView({ behavior: 'smooth' });

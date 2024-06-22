@@ -196,7 +196,11 @@
 
 
 
+<<<<<<< HEAD
             <div id="user-form" class="report-container mt-5 pt-8 px-3 {{ $errors->any() ? '' : 'hidden' }}">
+=======
+            <div class="report-container mt-12 pt-8 px-3 hidden" id="user-form">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                 <div class="form-container max-w-lg mx-auto">
                     <h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Workflow</h1>
 

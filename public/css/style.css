@@ -10,6 +10,7 @@ box-sizing: border-box;
 font-family: "Poppins", sans-serif;
 }
 :root {
+<<<<<<< HEAD
 --background-color1: #000814;
 --background-color2: #000814;
 --background-color3: #001d3d;
@@ -19,6 +20,17 @@ font-family: "Poppins", sans-serif;
 --Border-color: #003566;
 --one-use-color: #003566;
 --two-use-color: #ffc300;
+=======
+--background-color1: #001d3d;
+--background-color2: #001d3d;
+--background-color3: #001d3d;
+--background-color4: #00588e;
+--primary-color: #0781a5;
+--secondary-color: #003566;
+--Border-color: #006c97;
+--one-use-color: #003566;
+--two-use-color: #007fbe;
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 }
 body {
 background-color: var(--primary-color);
@@ -191,7 +203,11 @@ transition: all 0.1s ease-in-out;
 }
 .nav-option:hover {
 border-left: 5px solid #a2a2a2;
+<<<<<<< HEAD
 background-color: #bae6fd;
+=======
+background-color: rgb(7 89 133);;
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 cursor: pointer;
 color: #000814;
 }
@@ -262,6 +278,9 @@ background-color: var(--two-use-color);
 }
 .box:nth-child(9) {
     background-color: var(--two-use-color);
+}
+.box:nth-child(9) {
+    background-color: var(--one-use-color);
 }
 .box img {
 height: 50px;

@@ -13,6 +13,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+<<<<<<< HEAD
         <style>
         @keyframes gradientAnimation {
             0% {
@@ -96,6 +97,9 @@
         .snowflake:nth-child(17) { left: 85%; animation-delay: 32s; }
         .snowflake:nth-child(18) { left: 95%; animation-delay: 34s; }
         </style>
+=======
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="animated-background"></div>

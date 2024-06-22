@@ -43,7 +43,11 @@
                                     placeholder="Nom de l'opportunité" required>
 
                                     @error('nom')
+<<<<<<< HEAD
                                     <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
                                         {{$message}}
                                     </div>
 

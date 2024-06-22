@@ -75,6 +75,7 @@ public function store(LoginRequest $request): RedirectResponse
 
     }
     public function storeuser(Request $request)
+<<<<<<< HEAD
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -111,6 +112,43 @@ public function store(LoginRequest $request): RedirectResponse
         }
     }
 
+=======
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'role' => ['required', 'string'],
+        'photo' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+    ], [
+        'password.min' => 'Le mot de passe doit comporter au moins :min caractères.',
+        'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+    ]);
+
+    try {
+        $photo = null;
+        if ($request->hasFile('photo')) {
+            // Enregistrer l'image
+            $photoPath = $request->file('photo')->store('public/photos');
+            $photo = basename($photoPath); // Récupérer uniquement le nom du fichier
+        }
+
+        // Créer un nouvel utilisateur avec la photo
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->photo = $photo;
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Utilisateur créé avec succès!');
+
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->with('error', 'Erreur lors de la création de l\'utilisateur: ' . $e->getMessage());
+    }
+}
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 
     public function modifieruserindex($id)
     {

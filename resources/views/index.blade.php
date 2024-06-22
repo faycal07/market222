@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="{{ asset('css/fontawesome-free-6.5.2-web/css/all.min.css') }}">
     <title>Toudja Drinks</title>
     @vite('resources/css/app.css')
+<<<<<<< HEAD
     <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
+=======
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 
   </head>
   <body>
@@ -162,7 +165,11 @@
     <div class="container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 md:flex-row md:space-y-0">
       <h2 class="text-5xl font-bold leading-tight text-center text-white md:text-4xl md:max-w-xl md:text-left fade-in">Essayez nos boissons dès aujourd'hui</h2>
       <div>
+<<<<<<< HEAD
         <a href="#produits" class="p-3 px-6 pt-2 text-red-600 bg-yellow-400 rounded-full baseline hover:bg-yellow-300 shadow-2xl fade-in">Découvrez nos produits</a>
+=======
+        <a href="#" class="p-3 px-6 pt-2 text-red-600 bg-yellow-400 rounded-full baseline hover:bg-yellow-300 shadow-2xl fade-in">Découvrez nos produits</a>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
       </div>
     </div>
   </section>
@@ -185,11 +192,19 @@
             <a href="#" class="smooth-scroll hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Contactez-Nous</a>
 
           </div>
+<<<<<<< HEAD
           {{-- <div class="flex flex-col space-y-3 text-white fade-in">
             <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Assistance</a>
             <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Communauté</a>
             <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Politique de confidentialité</a>
           </div> --}}
+=======
+          <div class="flex flex-col space-y-3 text-white fade-in">
+            <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Assistance</a>
+            <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Communauté</a>
+            <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Politique de confidentialité</a>
+          </div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
         </div>
         <div class="flex justify-around space-x-10 p-16 fade-in">
           <a href="https://www.facebook.com/toudja.dz/?locale=fr_FR" class="text-white hover:text-yellow-400 transition-transform duration-300 transform hover:scale-150"><i class="fa-brands fa-facebook fa-xl"></i></a>
