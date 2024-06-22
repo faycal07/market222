@@ -6,7 +6,18 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+
+    extend: {
+        colors: {
+
+            'nav': '#000814',
+            'blufoncer': '#001D3D',
+            'bluclaire': '#003566',
+            'jaunef': '#ffc300',
+            'joune': '#ffd60a',
+          },
+    },
+
   },
   plugins: [
 

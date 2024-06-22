@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modèle de Compagne Marketing par Email pour une Boisson</title>
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 
 </head>
 <body style="background-color: #f9fafb; padding: 20px; font-family: Arial, sans-serif;">
@@ -19,7 +20,7 @@
 
             <!-- Subject Section -->
             <div class="subject-section bg-blue-600 py-6 text-center text-white">
-                <h2 class="text-3xl font-bold tracking-wide">Bienvenue!</h2>
+                <h2 class="text-3xl font-bold tracking-wide">Bienvenue {{ $lead->nom }} !</h2>
             </div>
 
             <!-- Image Section -->

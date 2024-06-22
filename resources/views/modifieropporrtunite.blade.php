@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/formulaire.css') }}">
     @vite('resources/css/app.css')
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 </head>
 
 <body>
@@ -20,15 +21,6 @@
         @include('sidebar')
         <div class="main">
 
-            @if ($errors->any())
-            <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
 
             @if (session('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
@@ -49,6 +41,13 @@
                                 <input type="text" id="nom" name="nom" value="{{ $opportunite->nom }}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="Nom de l'opportunité" required>
+
+                                    @error('nom')
+                                    <div class="text-red-500 text-sm">
+                                        {{$message}}
+                                    </div>
+
+                                    @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="stages_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Stages:</label>
@@ -58,9 +57,17 @@
                                     <option value="{{ $stage->id }}">{{ $stage->nom }}</option>
                                     @endforeach
                                 </select>
+
+                                @error('stages_id[]')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="flex items-center justify-center h-16">
                                 <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Modifier</button>
+                                <a href="{{route('opportunites.index')}}" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
                             </div>
                         </form>
 

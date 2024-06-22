@@ -1,1340 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="Bootstrap, Landing page, Template, Business, Service">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="author" content="Grayrids">
-    <title>Slick - Bootstrap 4 Template</title>
-    <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="welcome/img/2.png" type="image/png">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="welcome/css/bootstrap.min.css">
-    <link rel="stylesheet" href="welcome/css/animate.css">
-    <link rel="stylesheet" href="welcome/css/LineIcons.css">
-    <link rel="stylesheet" href="welcome/css/owl.carousel.css">
-    <link rel="stylesheet" href="welcome/css/owl.theme.css">
-    <link rel="stylesheet" href="welcome/css/magnific-popup.css">
-    <link rel="stylesheet" href="welcome/css/nivo-lightbox.css">
-    <link rel="stylesheet" href="welcome/css/main.css">
-    <link rel="stylesheet" href="welcome/css/responsive.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{ asset('css/landing.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+<link rel="stylesheet" href="{{ asset('css/fontawesome-free-6.5.2-web/css/all.min.css') }}">
+    <title>Toudja Drinks</title>
+    @vite('resources/css/app.css')
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 
   </head>
-
   <body>
+<style>
+.fade-in {
+  opacity: 0;
+  transition: opacity 1.25s ease-in-out;
+}
 
-    <!-- Header Section Start -->
-    <header id="home" class="hero-area">
-      <div class="overlay">
-        <span></span>
-        <span></span>
-      </div>
-      <nav class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar">
-        <div class="container">
-          <a href="index.html" class="navbar-brand"><img src="welcome/img/logo.png" alt="" style="height: 60px"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="lni-menu"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto w-100 justify-content-end">
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#home">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#services">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#features">Services</a>
-              </li>
+.fade-in.active {
+  opacity: 1;
+}
 
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#pricing">Pricing</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#blog">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="#contact">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="btn btn-singin" href="#">Download</a>
-              </li>
-            </ul>
-          </div>
+</style>
+    <nav class="relative container mx-auto p-3">
+      <div class="flex items-center justify-between ">
+        <div class="pt-2">
+          <a href="/"><img src="/images/logotoudja.png" alt="logo" class="h-16 w-32"></a>
         </div>
-      </nav>
-      <div class="container">
-        <div class="row space-100">
-          <div class="col-lg-6 col-md-12 col-xs-12">
-            <div class="contents">
-              <h2 class="head-title">You are Using Free Lite Version</h2>
-              <p>Please, Purchase full version of Slick to get all pages, features and permission to use in commercial projects</p>
-              <div class="header-button">
-                <a href= "#" rel="nofollow" target="_blank" class="btn btn-border-filled">Purchase Now</a>
-                <a href="#" rel="nofollow" target="_blank" class="btn btn-border page-scroll">Learn More</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12 col-xs-12 p-0">
-            <div class="intro-img">
-              <img src="welcome/img/image1.png.png"  style="height:350px">
-            </div>
-          </div>
+        <div class="hidden md:flex space-x-2 lg:space-x-7">
+
+          <a href="#produits" class="smooth-scroll hover:bg-yellow-300 text-white hover:text-sky-900 hover:scale-110 transform transition duration-200 px-1 py-1 rounded-lg font-bold">Produits</a>
+          <a href="#propos" class="smooth-scroll hover:bg-yellow-300 text-white hover:text-sky-900 hover:scale-110 transform transition duration-200 px-1 py-1 rounded-lg font-bold">À Propos</a>
+          <a href="#" class="smooth-scroll hover:bg-yellow-300 text-white hover:text-sky-900 hover:scale-110 transform transition duration-200 px-1 py-1 rounded-lg font-bold">Contactez-Nous</a>
+          <a href="#" class="smooth-scroll hover:bg-yellow-300 text-white hover:text-sky-900 hover:scale-110 transform transition duration-200 px-1 py-1 rounded-lg font-bold">Communauté</a>
+        </div>
+        <a href="{{ route('login') }}" class="hidden p-3 px-6 bg-sky-500 rounded-full baseline text-white hover:bg-yellow-400 md:block hover:scale-110 transform transition duration-200 font-bold">Connexion</a>
+        <!-- Hamburger icon -->
+        <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
+          <span class="hamburger-top"></span>
+          <span class="hamburger-middle"></span>
+          <span class="hamburger-bottom"></span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="md:hidden">
+        <div id="menu" class="absolute flex-col items-center hidden self-end py-8 mt-10 space-y-6 font-bold text-slate-50 bg-slate-900 sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+
+          <a href="#produits" class="smooth-scroll">Produits</a>
+          <a href="#propos" class="smooth-scroll">À Propos</a>
+          <a href="#" class="smooth-scroll">Contactez-Nous</a>
+          <a href="#" class="smooth-scroll">Communauté</a>
         </div>
       </div>
-    </header>
-    <!-- Header Section End -->
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="container flex flex-col-reverse items-center  md:px-6 mx-auto mt-10 space-y-0 md:space-y-0 md:flex-row">
+        <!-- Left Side -->
+        <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
+
+          <h1 class="max-w-md text-3xl font-sans text-center md:text-5xl md:text-left items-center space-x-0 font-bold italic text-sky-100 text-stroke fade-in" id="userName"></h1>
+
+          <p class="max-w-sm text-center md:text-left font-bold text-xl font-sans gradient-text fade-in">
+            Découvrez nos boissons rafraîchissantes et naturelles, conçues pour réunir les gens et célébrer les moments de vie. Chaque gorgée est une invitation à la convivialité et au partage.
+        </p>
 
 
-    <!-- Services Section Start -->
-    <section id="services" class="section">
-      <div class="container">
-
-        <div class="row">
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-6 col-xs-12">
-            <div class="services-item text-center">
-              <div class="icon">
-                <i class="lni-cog"></i>
-              </div>
-              <h4>Bootstrap 4</h4>
-              <p>Share processes and data secure lona need to know basis Our team assured your web site is always safe.</p>
-            </div>
+          <div class="flex justify-center md:justify-start fade-in">
+            <a href="{{ route('login') }}" class=" p-3 px-6 bg-sky-500 rounded-full baseline text-white hover:bg-yellow-400 hover:scale-110 transform transition duration-200 font-bold">Connexion</a>
           </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-6 col-xs-12">
-            <div class="services-item text-center">
-              <div class="icon">
-                <i class="lni-brush"></i>
-              </div>
-              <h4>Slick Design</h4>
-              <p>Share processes and data secure lona need to know basis Our team assured your web site is always safe.</p>
-            </div>
-          </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-6 col-xs-12">
-            <div class="services-item text-center">
-              <div class="icon">
-                <i class="lni-heart"></i>
-              </div>
-              <h4>Crafted with Love</h4>
-              <p>Share processes and data secure lona need to know basis Our team assured your web site is always safe.</p>
-            </div>
-          </div>
-          <!-- End Col -->
-
+        </div>
+        <!-- Right Side -->
+        <div class="md:w-1/2">
+          <!-- Image Placeholder -->
+           {{-- <img src="{{ asset('images/p1.jpg') }}" alt="img" class="px-14" />  --}}
         </div>
       </div>
     </section>
-    <!-- Services Section End -->
+    <section id="propos" class="fade-in">
+      <div class="container flex flex-col px-8 mx-auto my-10 space-y-12 md:space-y-0 md:flex-row">
+        <div class="flex flex-col px-16 space-y-12 md:h-1/2 fade-in">
+          <h2 class="max-w-md text-4xl font-bold text-center md:text-left text-sky-950 italic">Qu'est-ce qui nous rend uniques ?</h2>
+          <p class="max-w-md text-center text-sky-800 font-bold italic md:text-left bg-yellow-100 rounded-lg p-4 transition transform hover:shadow-xl hover:scale-105 duration-200">Chez Toudja, nous puisons notre inspiration dans la nature, en utilisant des ingrédients naturels soigneusement sélectionnés pour offrir des boissons de qualité inégalée. Avec un engagement envers la qualité et la durabilité, nous apportons fraîcheur et innovation dans chaque bouteille. Notre passion pour la création de boissons uniques se reflète dans chaque gorgée, vous invitant à découvrir une expérience gustative authentique et rafraîchissante.</p>
+        </div>
 
-
-
-    <!-- Business Plan Section Start -->
-    <section id="business-plan">
-      <div class="container">
-
-        <div class="row">
-          <!-- Start Col -->
-          <div class="col-lg-6 col-md-12 pl-0 pt-70 pr-5">
-            <div class="business-item-img">
-              <img src="welcome/img/business/business-img.png" class="img-fluid" alt="">
+        <div class="flex flex-col space-y-8 md:w-1/2 fade-in">
+          <div class="flex flex-col space-y-3 md:space-y-0 md:space-w-6 md:flex-row md:bg-slate-300 p-5 rounded-3xl transition transform hover:shadow-xl hover:scale-105 duration-200">
+            <div class="rounded-full bg-yellow-500 md:bg-transparent">
+              <div class="flex items-center space-x-2 mx-3">
+                <div class="px-4 py-2 text-white rounded-full md:py-1 bg-yellow-500">01</div>
+                <h3 class="text-base font-bold md:mb-4 md:hidden">Suivi des progrès de l'entreprise</h3>
+              </div>
+            </div>
+            <div>
+              <h3 class="hidden mb-4 text-lg ml-1 font-bold md:block">Suivi des progrès de l'entreprise</h3>
+              <p class="text-slate-800 font-bold italic">Nous assurons un suivi rigoureux de chaque étape de production pour garantir des produits d'une qualité exceptionnelle.</p>
             </div>
           </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-6 col-md-12 pl-4">
-            <div class="business-item-info">
-              <h3>Crafted For Business, Startup and Agency Websites</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <br> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim <br> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea <br> commodo consequat. Duis aute irure dolor in reprehenderit in voluptate <br> velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
-              <a class="btn btn-common" href="#">download</a>
+          <div class="flex flex-col space-y-3 md:space-y-0 md:space-w-6 md:flex-row md:bg-slate-300 p-5 rounded-3xl transition transform hover:shadow-xl hover:scale-105 duration-200">
+            <div class="rounded-full bg-yellow-500 md:bg-transparent">
+              <div class="flex items-center space-x-2 mx-3">
+                <div class="px-4 py-2 text-white rounded-full md:py-1 bg-yellow-500">02</div>
+                <h3 class="text-base font-bold md:mb-4 md:hidden">Innovations constantes</h3>
+              </div>
+            </div>
+            <div>
+              <h3 class="hidden mb-4 text-lg ml-1 font-bold md:block">Innovations constantes</h3>
+              <p class="text-slate-800 font-bold italic">Nous innovons constamment pour introduire de nouvelles saveurs et produits qui répondent aux attentes de nos consommateurs.</p>
             </div>
           </div>
-          <!-- End Col -->
-
+          <div class="flex flex-col space-y-3 md:space-y-0 md:space-w-6 md:flex-row md:bg-slate-300 p-5 rounded-3xl transition transform hover:shadow-xl hover:scale-105 duration-200">
+            <div class="rounded-full bg-yellow-500 md:bg-transparent">
+              <div class="flex items-center space-x-2 mx-3">
+                <div class="px-4 py-2 text-white rounded-full md:py-1 bg-yellow-500">03</div>
+                <h3 class="text-base font-bold md:mb-4 md:hidden">Engagement envers la durabilité</h3>
+              </div>
+            </div>
+            <div>
+              <h3 class="hidden mb-4 text-lg ml-1 font-bold md:block">Engagement envers la durabilité</h3>
+              <p class="text-slate-800 font-bold italic">Notre production respecte des normes strictes de durabilité pour minimiser notre impact environnemental tout en offrant des produits de haute qualité.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-    <!-- Business Plan Section End -->
 
 
-
-    <!-- Cool Fetatures Section Start -->
-    <section id="features" class="section">
-      <div class="container">
-        <!-- Start Row -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="features-text section-header text-center">
-              <div>
-                <h2 class="section-title">Services We Provide</h2>
-                <div class="desc-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <br> eiusmod tempor incididunt ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
+  <!-- Testimonials Section -->
+  <section id="produits">
+    <div class="fade-in max-w-6xl px-5 mx-auto mt-32 mb-40 text-center ">
+      <h2 class="text-4xl font-bold text-center text-slate-900 pb-8">Nos Produits Populaires</h2>
+      <div class="flex flex-col mt-24 md:flex-row md:space-x-6">
+        <div class="flex flex-col items-center p-6 mt-28 md:mt-10 space-y-6 rounded-2xl bg-sky-700 md:w-1/3 transition transform hover:shadow-xl hover:scale-105 duration-200">
+          <img src="images/p1.jpg" alt="img" class="w-40 h-40 -mt-28 rounded-3xl" />
+          <h5 class="text-lg font-bold text-slate-800">Boisson d'Orange</h5>
+          <p class="text-sm text-blue-100 font-semibold">"Plongez dans la fraîcheur exquise de notre boisson fruitée à l'orange, pressée à partir des meilleures oranges locales. Chaque gorgée est une explosion de saveurs naturelles et authentiques, parfaite pour revitaliser vos sens."</p>
         </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row featured-bg">
-         <!-- Start Col -->
-          <div class="col-lg-6 col-md-6 col-xs-12 p-0">
-             <!-- Start Fetatures -->
-            <div class="feature-item featured-border1">
-               <div class="feature-icon float-left">
-                 <i class="lni-coffee-cup"></i>
-               </div>
-               <div class="feature-info float-left">
-                 <h4>Easy to Customize</h4>
-                 <p>Producing long lasting organic SEO results for <br> brand of different kinds for more than a decade,<br> we understand that’s your.</p>
-               </div>
-            </div>
-            <!-- End Fetatures -->
-          </div>
-           <!-- End Col -->
-
-         <!-- Start Col -->
-          <div class="col-lg-6 col-md-6 col-xs-12 p-0">
-             <!-- Start Fetatures -->
-            <div class="feature-item featured-border2">
-               <div class="feature-icon float-left">
-                 <i class="lni-briefcase"></i>
-               </div>
-               <div class="feature-info float-left">
-                 <h4>Business Template</h4>
-                 <p>Producing long lasting organic SEO results for <br> brand of different kinds for more than a decade,<br> we understand that’s your.</p>
-               </div>
-            </div>
-            <!-- End Fetatures -->
-          </div>
-           <!-- End Col -->
-
-         <!-- Start Col -->
-          <div class="col-lg-6 col-md-6 col-xs-12 p-0">
-             <!-- Start Fetatures -->
-            <div class="feature-item featured-border1">
-               <div class="feature-icon float-left">
-                 <i class="lni-invention"></i>
-               </div>
-               <div class="feature-info float-left">
-                 <h4>Clean & Trendy Design</h4>
-                 <p>Producing long lasting organic SEO results for <br> brand of different kinds for more than a decade,<br> we understand that’s your.</p>
-               </div>
-            </div>
-            <!-- End Fetatures -->
-          </div>
-           <!-- End Col -->
-
-         <!-- Start Col -->
-          <div class="col-lg-6 col-md-6 col-xs-12 p-0">
-             <!-- Start Fetatures -->
-            <div class="feature-item featured-border2">
-               <div class="feature-icon float-left">
-                <i class="lni-layers"></i>
-               </div>
-               <div class="feature-info float-left">
-                 <h4>Tons of Sections</h4>
-                 <p>Producing long lasting organic SEO results for <br> brand of different kinds for more than a decade,<br> we understand that’s your.</p>
-               </div>
-            </div>
-            <!-- End Fetatures -->
-          </div>
-           <!-- End Col -->
-
-         <!-- Start Col -->
-          <div class="col-lg-6 col-md-6 col-xs-12 p-0">
-             <!-- Start Fetatures -->
-            <div class="feature-item featured-border3">
-               <div class="feature-icon float-left">
-                 <i class="lni-reload"></i>
-               </div>
-               <div class="feature-info float-left">
-                 <h4>Free Future Updates</h4>
-                 <p>Producing long lasting organic SEO results for <br> brand of different kinds for more than a decade,<br> we understand that’s your.</p>
-               </div>
-            </div>
-            <!-- End Fetatures -->
-          </div>
-           <!-- End Col -->
-
-         <!-- Start Col -->
-          <div class="col-lg-6 col-md-6 col-xs-12 p-0">
-             <!-- Start Fetatures -->
-            <div class="feature-item">
-               <div class="feature-icon float-left">
-                 <i class="lni-support"></i>
-               </div>
-               <div class="feature-info float-left">
-                 <h4>Premier Support</h4>
-                 <p>Producing long lasting organic SEO results for <br> brand of different kinds for more than a decade,<br> we understand that’s your.</p>
-               </div>
-            </div>
-            <!-- End Fetatures -->
-          </div>
-           <!-- End Col -->
-
-
+        <div class="flex flex-col items-center p-6 mt-28 md:mt-10 space-y-6 rounded-2xl bg-sky-700 md:w-1/3 transition transform hover:shadow-xl hover:scale-105 duration-200">
+          <img src="images/p2.jpg" alt="img" class="w-40 -mt-28 h-40 rounded-3xl" />
+          <h5 class="text-lg font-bold text-slate-800">Perfecto</h5>
+          <p class="text-sm text-blue-100 font-semibold">"Laissez-vous séduire par Perfecto, notre boisson gazeuse irrésistible. Avec son goût unique et ses bulles délicates, elle vous offre une expérience gustative exceptionnelle et fidèle à la tradition des saveurs authentiques."</p>
         </div>
-        <!-- End Row -->
+        <div class="flex flex-col items-center p-6 mt-28 md:mt-10 space-y-6 rounded-2xl bg-sky-700 md:w-1/3 transition transform hover:shadow-xl hover:scale-105 duration-200">
+          <img src="images/p3.jpg" alt="img" class="w-40 -mt-28 h-40 rounded-3xl" />
+          <h5 class="text-lg font-bold text-slate-800">Eau Minérale</h5>
+          <p class="text-sm text-blue-100 font-semibold">"Découvrez l'originalité et la pureté de notre eau minérale Toudja. Riche en minéraux naturels, elle offre une hydratation optimale et une saveur authentique, fidèle à notre engagement pour la qualité et la durabilité."</p>
+        </div>
       </div>
-    </section>
-    <!-- Cool Fetatures Section End -->
-
-
-    <!-- Recent Showcase Section Start -->
-    <section id="showcase">
-      <div class="container-fluid right-position">
-        <!-- Start Row -->
-        <div class="row gradient-bg">
-          <div class="col-lg-12">
-            <div class="showcase-text section-header text-center">
-              <div>
-                <h2 class="section-title">Recent Works</h2>
-                <div class="desc-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
-                  <p>eiusmod tempor incididunt ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row justify-content-center showcase-area">
-          <div class="col-lg-12 col-md-12 col-xs-12 pr-0">
-            <div class="showcase-slider owl-carousel">
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/01.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/02.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/02.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/03.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/03.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/04.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/04.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/05.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/05.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/01.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/02.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/02.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/03.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/03.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/04.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/04.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/05.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/05.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/01.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/02.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/03.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/04.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/05.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/01.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/02.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/03.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/04.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="screenshot-thumb">
-                  <img src="welcome/img/showcase/05.jpg" class="img-fluid" alt="" />
-                  <div class="hover-content text-center">
-                    <div class="fancy-table">
-                      <div class="table-cell">
-                        <div class="single-text">
-                          <p>Icon , Web</p>
-                          <h5>Redesign Slack</h5>
-                        </div>
-                        <div class="zoom-icon">
-                          <a class="lightbox" href="welcome/img/showcase/01.jpg"><i class="lni-zoom-in"></i></a>
-                          <a href="#"><i class="lni-link"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
-        <!-- End Row -->
-      </div>
-    </section>
-    <!-- Recent Showcase Section End -->
-
-    <!-- Our Pricing Plan Section Start -->
-    <section id="pricing" class="section">
-      <div class="container">
-        <!-- Start Row -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="pricing-text section-header text-center">
-              <div>
-                <h2 class="section-title">Pricing Plans</h2>
-                <div class="desc-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
-                  <p>eiusmod tempor incididunt ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row pricing-tables">
-         <!--  Start Col -->
-          <div class="col-lg-4 col-md-4 col-xs-12">
-            <div class="pricing-table text-center">
-              <div class="pricing-details">
-                <h3>Free</h3>
-                <h1><span>$</span>00</h1>
-                <ul>
-                  <li>Free Instalation</li>
-                  <li>500MB Storage</li>
-                  <li>Single User</li>
-                  <li>5 GB Bandwith</li>
-                  <li>Minimal Features</li>
-                  <li>No Dashboard</li>
-                </ul>
-              </div>
-              <div class="plan-button">
-                <a href="#" class="btn btn-border">Purchase</a>
-              </div>
-            </div>
-          </div>
-           <!--  End Col -->
-         <!--  Start Col -->
-          <div class="col-lg-4 col-md-4 col-xs-12">
-            <div class="pricing-table text-center">
-              <div class="pricing-details">
-                <h3>standard</h3>
-                <h1><span>$</span>19.99</h1>
-                <ul>
-                  <li>Free Instalation</li>
-                  <li>2 GB Storage</li>
-                  <li>Upto 2 users</li>
-                  <li>50 GB Bandwith</li>
-                  <li>All Features</li>
-                  <li>Sales Dashboard</li>
-                </ul>
-              </div>
-              <div class="plan-button">
-                <a href="#" class="btn btn-common">Purchase</a>
-              </div>
-            </div>
-          </div>
-           <!--  End Col -->
-         <!--  Start Col -->
-          <div class="col-lg-4 col-md-4 col-xs-12">
-            <div class="pricing-table text-center">
-              <div class="pricing-details">
-                <h3>Business</h3>
-                <h1><span>$</span>29.99</h1>
-                <ul>
-                  <li>Free Instalation</li>
-                  <li>5 GB Storage</li>
-                  <li>Upto 4 users</li>
-                  <li>100 GB Bandwith</li>
-                  <li>All Features</li>
-                  <li>Sales Dashboard</li>
-                </ul>
-              </div>
-              <div class="plan-button">
-                <a href="#" class="btn btn-border">Purchase</a>
-              </div>
-            </div>
-          </div>
-           <!--  End Col -->
-
-        </div>
-        <!-- End Row -->
-      </div>
-    </section>
-    <!-- Our Pricing Plan Section End -->
-
-    <!-- Client Testimoninals Section Start -->
-    <section id="testimonial" class="section">
-      <div class="container right-position">
-        <!-- Start Row -->
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
-            <div class="video-promo-content text-center">
-
-              <a id="play-video" class="video-play-button video-popup" href="https://www.youtube.com/watch?v=Y4fodpIwal8&list=RDXCElIIYx_8s&index=13">
-                <span></span>
-              </a>
-
-            </div>
-          </div>
-        </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row justify-content-center testimonial-area">
-          <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 pr-20 pl-20" style="overflow: hidden;padding-bottom: 60px">
-            <div id="client-testimonial" class="text-center owl-carousel">
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change <br> vis-a-vis wireless catalysts for change. Enthusiastically architect <br> adaptive e-tailers after sustainable total linkage. Appropriately <br> implement one-to-one catalysts for change.</p>
-                    <div class="author-info">
-                      <h5>Tahmina Anny ; <span> UIdeck Customer</span></h5>
-                    </div>
-                  </div>
-                  <div class="client-thumb">
-                    <img src="welcome/img/testimonial/01.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change <br> vis-a-vis wireless catalysts for change. Enthusiastically architect <br> adaptive e-tailers after sustainable total linkage. Appropriately <br> implement one-to-one catalysts for change.</p>
-                    <div class="author-info">
-                      <h5>Tahmina Anny ; <span> UIdeck Customer</span></h5>
-                    </div>
-                  </div>
-                  <div class="client-thumb">
-                    <img src="welcome/img/testimonial/01.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change <br> vis-a-vis wireless catalysts for change. Enthusiastically architect <br> adaptive e-tailers after sustainable total linkage. Appropriately <br> implement one-to-one catalysts for change.</p>
-                    <div class="author-info">
-                      <h5>Tahmina Anny ; <span> UIdeck Customer</span></h5>
-                    </div>
-                  </div>
-                  <div class="client-thumb">
-                    <img src="img/testimonial/01.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change <br> vis-a-vis wireless catalysts for change. Enthusiastically architect <br> adaptive e-tailers after sustainable total linkage. Appropriately <br> implement one-to-one catalysts for change.</p>
-                    <div class="author-info">
-                      <h5>Tahmina Anny ; <span> UIdeck Customer</span></h5>
-                    </div>
-                  </div>
-                  <div class="client-thumb">
-                    <img src="welcome/img/testimonial/01.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change <br> vis-a-vis wireless catalysts for change. Enthusiastically architect <br> adaptive e-tailers after sustainable total linkage. Appropriately <br> implement one-to-one catalysts for change.</p>
-                    <div class="author-info">
-                      <h5>Tahmina Anny ; <span> UIdeck Customer</span></h5>
-                    </div>
-                  </div>
-                  <div class="client-thumb">
-                    <img src="welcome/img/testimonial/01.png" alt="">
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimonial-item">
-                  <div class="content-inner">
-                    <p class="description">Appropriately implement one-to-one catalysts for change <br> vis-a-vis wireless catalysts for change. Enthusiastically architect <br> adaptive e-tailers after sustainable total linkage. Appropriately <br> implement one-to-one catalysts for change.</p>
-                    <div class="author-info">
-                      <h5>Tahmina Anny ; <span> UIdeck Customer</span></h5>
-                    </div>
-                  </div>
-                  <div class="client-thumb">
-                    <img src="welcome/img/testimonial/01.png" alt="">
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- End Row -->
-      </div>
-    </section>
-    <!-- Client Testimoninals Section End -->
-
-
-    <!-- Team section Start -->
-    <section id="team" class="section">
-      <div class="container">
-        <!-- Start Row -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="team-text section-header text-center">
-              <div>
-                <h2 class="section-title">Team Members</h2>
-                <div class="desc-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
-                  <p>eiusmod tempor incididunt ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row">
-          <!-- Start Col -->
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team">
-              <div class="team-thumb">
-                <img src="welcome/img/team/01.jpg" class="img-fluid" alt="">
-              </div>
-
-              <div class="team-details">
-              <div class="team-social-icons">
-                  <ul class="social-list">
-                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-google-plus"></i></a></li>
-                  </ul>
-                </div>
-                <div class="team-inner text-center">
-                  <h5 class="team-title">Patric Green</h5>
-                  <p>Lead Designer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Start Col -->
-
-          <!-- Start Col -->
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team">
-              <div class="team-thumb">
-                <img src="welcome/img/team/02.jpg" class="img-fluid" alt="">
-              </div>
-
-              <div class="team-details">
-              <div class="team-social-icons">
-                  <ul class="social-list">
-                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-google-plus"></i></a></li>
-                  </ul>
-                </div>
-                <div class="team-inner text-center">
-                  <h5 class="team-title">Celina D Cruze</h5>
-                  <p>Front-end Developer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Start Col -->
-
-          <!-- Start Col -->
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team">
-              <div class="team-thumb">
-                <img src="img/team/03.jpg" class="img-fluid" alt="">
-              </div>
-
-              <div class="team-details">
-              <div class="team-social-icons">
-                  <ul class="social-list">
-                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-google-plus"></i></a></li>
-                  </ul>
-                </div>
-                <div class="team-inner text-center">
-                  <h5 class="team-title">Daryl Dixon</h5>
-                  <p>Content Writer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Start Col -->
-
-          <!-- Start Col -->
-          <div class="col-lg-3 col-md-6 col-xs-12">
-            <div class="single-team">
-              <div class="team-thumb">
-                <img src="welcome/img/team/04.jpg" class="img-fluid" alt="">
-              </div>
-
-              <div class="team-details">
-                <div class="team-social-icons">
-                  <ul class="social-list">
-                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
-                    <li><a href="#"><i class="lni-google-plus"></i></a></li>
-                  </ul>
-                </div>
-                <div class="team-inner text-center">
-                  <h5 class="team-title">Mark Parker</h5>
-                  <p>Support Engineer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Start Col -->
-
-
-        </div>
-        <!-- End Row -->
-      </div>
-    </section>
-    <!-- Team section End -->
-
-
-    <!-- Blog Section -->
-    <section id="blog" class="section">
-      <!-- Container Starts -->
-      <div class="container">
-        <!-- Start Row -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="blog-text section-header text-center">
-              <div>
-                <h2 class="section-title">Latest Blog Posts</h2>
-                <div class="desc-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
-                  <p>eiusmod tempor incididunt ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row">
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <!-- Blog Item Starts -->
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="single-post.html">
-                  <img src="welcome/img/blog/01.jpg" class="img-fluid" alt="">
-                </a>
-              </div>
-              <div class="blog-item-text">
-                <h3><a href="single-post.html">How Slick Will Transform  <br>Your Business</a></h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                <a href="" class="read-more">5 Min read</a>
-              </div>
-              <div class="author">
-                <span class="name"><i class="lni-user"></i><a href="#">Posted by Admin</a></span>
-                <span class="date float-right"><i class="lni-calendar"></i><a href="#">10 April, 2020</a></span>
-              </div>
-            </div>
-            <!-- Blog Item Wrapper Ends-->
-          </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <!-- Blog Item Starts -->
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="single-post.html">
-                  <img src="welcome/img/blog/02.jpg" class="img-fluid" alt="">
-                </a>
-              </div>
-              <div class="blog-item-text">
-                <h3><a href="single-post.html">Growth Techniques for  <br>New Startups</a></h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                <a href="" class="read-more">5 Min read</a>
-              </div>
-              <div class="author">
-                <span class="name"><i class="lni-user"></i><a href="#">Posted by Admin</a></span>
-                <span class="date float-right"><i class="lni-calendar"></i><a href="#">10 April, 2020</a></span>
-              </div>
-            </div>
-            <!-- Blog Item Wrapper Ends-->
-          </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <!-- Blog Item Starts -->
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="single-post.html">
-                  <img src="welcome/img/blog/03.jpg" class="img-fluid" alt="">
-                </a>
-              </div>
-              <div class="blog-item-text">
-                <h3><a href="single-post.html">Writing Professional <br>Emails to Customers</a></h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry.</p>
-                <a href="" class="read-more">5 Min read</a>
-              </div>
-              <div class="author">
-                <span class="name"><i class="lni-user"></i><a href="#">Posted by Admin</a></span>
-                <span class="date float-right"><i class="lni-calendar"></i><a href="#">10 April, 2020</a></span>
-              </div>
-            </div>
-            <!-- Blog Item Wrapper Ends-->
-          </div>
-          <!-- End Col -->
-
-        </div>
-        <!-- End Row -->
-      </div>
-    </section>
-    <!-- blog Section End -->
-
-    <!-- Contact Us Section -->
-    <section id="contact" class="section">
-      <!-- Container Starts -->
-      <div class="container">
-        <!-- Start Row -->
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="contact-text section-header text-center">
-              <div>
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="desc-text">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do</p>
-                  <p>eiusmod tempor incididunt ut labore et dolore.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- End Row -->
-        <!-- Start Row -->
-        <div class="row">
-          <!-- Start Col -->
-          <div class="col-lg-6 col-md-12">
-          <form id="contactForm">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name">
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" placeholder="Subject" id="msg_subject" class="form-control" name="msg_subject" required data-error="Please enter your subject">
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Email" required data-error="Please enter your Email">
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <input type="text" placeholder="Budget" id="budget" class="form-control" name="budget" required data-error="Please enter your Budget">
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <textarea class="form-control" id="message"  name="message" placeholder="Write Message" rows="4" data-error="Write your message" required></textarea>
-                  <div class="help-block with-errors"></div>
-                </div>
-                <div class="submit-button">
-                  <button class="btn btn-common" id="submit" type="submit">Submit</button>
-                  <div id="msgSubmit" class="h3 hidden"></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
-          </form>
-          </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-1">
-
-          </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-4 col-md-12">
-            <div class="contact-img">
-              <img src="welcome/img/contact/01.png" class="img-fluid" alt="">
-            </div>
-          </div>
-          <!-- End Col -->
-          <!-- Start Col -->
-          <div class="col-lg-1">
-          </div>
-          <!-- End Col -->
-
-        </div>
-        <!-- End Row -->
-      </div>
-    </section>
-    <!-- Contact Us Section End -->
-
-    <!-- Footer Section Start -->
-    <footer>
-      <!-- Footer Area Start -->
-      <section id="footer-Content">
-        <div class="container">
-          <!-- Start Row -->
-          <div class="row">
-
-          <!-- Start Col -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-
-              <div class="footer-logo">
-               <img src="img/footer-logo.png" alt="">
-              </div>
-            </div>
-             <!-- End Col -->
-              <!-- Start Col -->
-            <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-              <div class="widget">
-                <h3 class="block-title">Company</h3>
-                <ul class="menu">
-                  <li><a href="#">  - About Us</a></li>
-                  <li><a href="#">- Career</a></li>
-                  <li><a href="#">- Blog</a></li>
-                  <li><a href="#">- Press</a></li>
-                </ul>
-              </div>
-            </div>
-             <!-- End Col -->
-              <!-- Start Col -->
-            <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-              <div class="widget">
-                <h3 class="block-title">Product</h3>
-                <ul class="menu">
-                  <li><a href="#">  - Customer Service</a></li>
-                  <li><a href="#">- Enterprise</a></li>
-                  <li><a href="#">- Price</a></li>
-                  <li><a href="#">- Scurity</a></li>
-                  <li><a href="#">- Why SLICK?</a></li>
-                </ul>
-              </div>
-            </div>
-             <!-- End Col -->
-              <!-- Start Col -->
-            <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-              <div class="widget">
-                <h3 class="block-title">Download App</h3>
-                <ul class="menu">
-                  <li><a href="#">  - Android App</a></li>
-                  <li><a href="#">- IOS App</a></li>
-                  <li><a href="#">- Windows App</a></li>
-                  <li><a href="#">- Play Store</a></li>
-                  <li><a href="#">- IOS Store</a></li>
-                </ul>
-              </div>
-            </div>
-             <!-- End Col -->
-              <!-- Start Col -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-              <div class="widget">
-                <h3 class="block-title">Subscribe Now</h3>
-                <p>Appropriately implement calysts for change visa wireless catalysts for change. </p>
-                <div class="subscribe-area">
-                  <input type="email" class="form-control" placeholder="Enter Email">
-                  <span><i class="lni-chevron-right"></i></span>
-                </div>
-              </div>
-            </div>
-            <!-- End Col -->
-          </div>
-          <!-- End Row -->
-        </div>
-        <!-- Copyright Start  -->
-
-        <div class="copyright">
-          <div class="container">
-            <!-- Star Row -->
-            <div class="row">
-              <div class="col-md-12">
-                <div class="site-info text-center">
-                  <p>Crafted by <a href="http://uideck.com" rel="nofollow">UIdeck</a></p>
-                </div>
-
-              </div>
-              <!-- End Col -->
-            </div>
-            <!-- End Row -->
-          </div>
-        </div>
-      <!-- Copyright End -->
-      </section>
-      <!-- Footer area End -->
-
-    </footer>
-    <!-- Footer Section End -->
-
-
-    <!-- Go To Top Link -->
-    <a href="#" class="back-to-top">
-      <i class="lni-chevron-up"></i>
-    </a>
-
-    <!-- Preloader -->
-    <div id="preloader">
-      <div class="loader" id="loader-1"></div>
     </div>
-    <!-- End Preloader -->
+  </section>
 
-    <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="welcome/js/jquery-min.js"></script>
-    <script src="welcome/js/popper.min.js"></script>
-    <script src="welcome/js/bootstrap.min.js"></script>
-    <script src="welcome/js/owl.carousel.js"></script>
-    <script src="welcome/js/jquery.nav.js"></script>
-    <script src="welcome/js/scrolling-nav.js"></script>
-    <script src="welcome/js/jquery.easing.min.js"></script>
-    <script src="welcome/js/nivo-lightbox.js"></script>
-    <script src="welcome/js/jquery.magnific-popup.min.js"></script>
-    <script src="welcome/js/form-validator.min.js"></script>
-    <script src="welcome/js/contact-form-script.js"></script>
-    <script src="welcome/js/main.js"></script>
 
+
+   <!-- CTA Section -->
+   <section id="cta" class="bg-red-600">
+    <div class="container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 md:flex-row md:space-y-0">
+      <h2 class="text-5xl font-bold leading-tight text-center text-white md:text-4xl md:max-w-xl md:text-left fade-in">Essayez nos boissons dès aujourd'hui</h2>
+      <div>
+        <a href="#produits" class="p-3 px-6 pt-2 text-red-600 bg-yellow-400 rounded-full baseline hover:bg-yellow-300 shadow-2xl fade-in">Découvrez nos produits</a>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-900 m-0">
+      <div class="container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
+        <div class="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:space-y-0 md:items-start fade-in">
+          <div class="mx-auto my-6 text-center text-white md:hidden">Toudja &copy; 2024</div>
+          <div>
+            <a href="/"><img src="/images/logotoudja.png" alt="logo" class="h-16 w-32" /></a>
+          </div>
+          <div class="hidden text-white md:block">Toudja &copy; 2024</div>
+        </div>
+        <div class="flex justify-around space-x-28">
+          <div class="flex flex-col space-y-3 text-white fade-in">
+            <a href="#propos" class="smooth-scroll hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">À Propos</a>
+            <a href="#produits" class="smooth-scroll hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Produits</a>
+            <a href="#" class="smooth-scroll hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Contactez-Nous</a>
+
+          </div>
+          {{-- <div class="flex flex-col space-y-3 text-white fade-in">
+            <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Assistance</a>
+            <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Communauté</a>
+            <a href="#" class="hover:text-yellow-400 transition-transform duration-300 transform hover:scale-105">Politique de confidentialité</a>
+          </div> --}}
+        </div>
+        <div class="flex justify-around space-x-10 p-16 fade-in">
+          <a href="https://www.facebook.com/toudja.dz/?locale=fr_FR" class="text-white hover:text-yellow-400 transition-transform duration-300 transform hover:scale-150"><i class="fa-brands fa-facebook fa-xl"></i></a>
+          <a href="https://www.instagram.com/toudjaboissons/" class="text-white hover:text-yellow-400 transition-transform duration-300 transform hover:scale-150"><i class="fa-brands fa-instagram fa-xl"></i></a>
+          <a href="https://x.com/toudja_" class="text-white hover:text-yellow-400 transition-transform duration-300 transform hover:scale-150"><i class="fa-brands fa-x-twitter fa-xl"></i></a>
+        </div>
+      </div>
+    </footer>
+
+
+    <script>
+
+        const userName = "Réunissez tout le monde";
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const userNameContainer = document.getElementById('userName');
+      userNameContainer.textContent = '';
+      userName.split('').forEach((letter, index) => {
+        const span = document.createElement('span');
+        span.classList.add('letter');
+        span.textContent = letter === ' ' ? '\u00A0' : letter; // Ajout d'espaces insécables pour conserver les espaces
+        userNameContainer.appendChild(span);
+        setTimeout(() => {
+          span.classList.add('show');
+        }, index * 200);
+      });
+    });
+
+
+
+
+    const btn = document.getElementById('menu-btn');
+const nav = document.getElementById('menu');
+const heroSection = document.getElementById('hero');
+
+btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    nav.classList.toggle('flex');
+    nav.classList.toggle('hidden');
+
+    if (nav.classList.contains('hidden')) {
+        // If menu is hidden, remove margin from hero section
+        heroSection.style.marginTop = '50px';
+    } else {
+        // If menu is shown, add margin to hero section
+        heroSection.style.marginTop = '350px';
+    }
+});
+
+
+    </script>
+      <script>
+
+  // Smooth scrolling functionality
+  document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+
+        // // Fonction pour vérifier si un élément est visible dans la fenêtre
+        // function isElementInViewport(el) {
+        //   const rect = el.getBoundingClientRect();
+        //   return (
+        //     rect.top >= 0 &&
+        //     rect.left >= 0 &&
+        //     rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        //     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        //   );
+        // }
+
+        // // Fonction pour gérer les animations au défilement
+        // function handleScrollAnimations() {
+        //   const elements = document.querySelectorAll('.fade-in');
+        //   elements.forEach(element => {
+        //     if (isElementInViewport(element)) {
+        //       element.classList.add('active');
+        //     }
+        //   });
+        // }
+
+        // // Écouteur d'événement pour gérer les animations au défilement lors du chargement initial et du défilement
+        // document.addEventListener('DOMContentLoaded', handleScrollAnimations);
+        // window.addEventListener('scroll', handleScrollAnimations);
+        // Function to check if an element is in the viewport
+        document.addEventListener('DOMContentLoaded', () => {
+  const elements = document.querySelectorAll('.fade-in');
+
+  const observerOptions = {
+    root: null, // Use the viewport as the container
+    rootMargin: '0px', // No margin around the root
+    threshold: 0.1 // Trigger when 10% of the element is visible
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // Stop observing once the element is visible
+      }
+    });
+  }, observerOptions);
+
+  elements.forEach(element => {
+    observer.observe(element);
+  });
+});
+      </script>
   </body>
 </html>

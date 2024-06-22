@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     @vite('resources/css/app.css')
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 </head>
 
 <body>
@@ -21,6 +22,7 @@
 	<div class="main-container">
 		@include('sidebar')
 		<div class="main" id="main">
+
             @if ($errors->any())
             <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
                 <ul>
@@ -31,6 +33,19 @@
             </div>
             @endif
 
+            @if (session('error') || $errors->any())
+            <script defer>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var userForm = document.getElementById('user-form');
+                    if (userForm) {
+                        userForm.scrollIntoView({ behavior: 'smooth' });
+                        userForm.classList.remove('hidden');
+                    }
+                });
+            </script>
+            @endif
+
+
             @if (session('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
@@ -39,11 +54,13 @@
 
 			<div class="box-container">
 
-				<div class="box box1">
+				<div class="box box1 ">
 					<div class="text">
-                        @php
-                         $nombreopportunites = DB::table('opportunites')->count();
-                         @endphp
+
+                          @php
+                          $user_id = auth()->id();
+                          $nombreopportunites= DB::table('opportunites')->where('user_id', $user_id)->count();
+                          @endphp
 						<h2 class="topic-heading">{{$nombreopportunites}}</h2>
 						<h2 class="topic">Opportunitée</h2>
 					</div>
@@ -52,28 +69,24 @@
 						alt="Views">
 				</div>
 
-				<div class="box box2">
-					<div class="text">
-						<h2 class="topic-heading">150</h2>
-						<h2 class="topic">Likes</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
-						alt="likes">
-				</div>
 
 
 
-                <div class="report-container">
+
+                <div class="report-container min-w-full">
                     <div class="report-header">
                         <h1 class="recent-Articles">Liste des Opportunités</h1>
-                        <a href="{{ route('opportunites.index') }}#user-form" onclick="scrollToForm()" class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800">Créer Opportunité</a>
+
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="relative bg-inherit">
+                                <input type="search" id="opportuniteSearchInput" name="username" class="peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                                <label for="opportuniteSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                            </div>
+                        </div>
+
+                        <a href="{{ route('opportunites.index') }}#user-form" onclick="scrollToForm()" class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800 w-40">Créer Opportunité</a>
                     </div>
 
-                    <div class="mb-4">
-                        <input type="text" id="opportuniteSearchInput" placeholder="Rechercher des opportunités..." class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    </div>
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
                         <table class="w-full text-sm text-left rtl:text-right text-slate-800 dark:text-slate-800">
@@ -86,6 +99,8 @@
                                 </tr>
                             </thead>
                             <tbody id="opportuniteTableBody">
+
+
                                 @foreach ($opportunites as $opportunite)
                                 <tr class="border-b even:bg-slate-300 odd:bg-slate-400 opportunite-item">
                                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-cyan-800">{{ $opportunite->id }}</td>
@@ -139,7 +154,7 @@
 </div>
 
 
-			<div class="report-container mt-6 pt-8 px-3 hidden" id="user-form">
+             <div id="user-form" class="report-container mt-5 pt-8 px-3 {{ $errors->any() ? '' : 'hidden' }}">
 				<div class="form-container max-w-lg mx-auto">
 					<h2 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Creer Opportunitée</h2>
 
@@ -150,6 +165,11 @@
 							<input type="text" id="nom" name="nom" required
 								class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 								placeholder="Nom de l'opportunité">
+                                @error('nom')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+                                @enderror
 						</div>
 						<div class="form-group mb-5 scrollbar">
 							<label for="stages_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Stages:</label>

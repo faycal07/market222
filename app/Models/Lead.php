@@ -2,8 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Stage;
+use App\Models\Product;
+use App\Models\Compagne;
+use App\Models\LeadType;
+use App\Models\LeadSource;
+use App\Models\Opportunite;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lead extends Model
 {
@@ -16,6 +23,7 @@ class Lead extends Model
         'opportunite_id',
         'produit_id',
         'stage_id',
+        'user_id',
     ];
     public function products()
     {
@@ -47,7 +55,10 @@ class Lead extends Model
     {
         return $this->belongsToMany(Compagne::class, 'compagne_lead');
     }
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
 }

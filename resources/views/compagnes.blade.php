@@ -2,44 +2,31 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible"
-		content="IE=edge">
-	<meta name="viewport"content="width=device-width initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Liste Compagnes</title>
+    <title>Liste Compagnes</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     @vite('resources/css/app.css')
 
-
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
-        #social-links ul li{
-        display: inline-block;}
-
-        #social-links ul li a{
-        padding: 20px;
-        margin: 2px;
-        font-size: 30px;
-        color: rgb(46,41,114);
-        background-color: #ccc};
-
-        #social-links ul li a:hover{
-            background-color:rgb(46,41,114);
-            color:white;
+        [x-cloak] {
+            display: none !important;
         }
-        </style>
-
+    </style>
 </head>
 
 <body>
 
     @include('navbar')
 
-	<div class="main-container">
-		@include('sidebar')
-		<div class="main" id="main">
+    <div class="main-container">
+        @include('sidebar')
+        <div class="main" id="main">
 
             @if ($errors->any())
             <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
@@ -51,90 +38,66 @@
             </div>
             @endif
 
+            @if (session('test'))
+            <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
+                {{ session('test') }}
+            </div>
+            @endif
+
             @if (session('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
 
-			<div class="box-container">
+            <div class="box-container">
 
-				<div class="box box1">
-					<div class="text">
+                <div class="box box1">
+                    <div class="text">
+
                         @php
-                    $nbrcompagens= DB::table('compagnes')->count();
-                     @endphp
-						<h2 class="topic-heading">{{$nbrcompagens}}</h2>
-						<h2 class="topic">Compagnes</h2>
-					</div>
+                        $user_id = auth()->id();
+                        $nbrcompagnes = DB::table('compagnes')->where('user_id', $user_id)->count();
+                        @endphp
+                        <h2 class="topic-heading">{{ $nbrcompagnes }}</h2>
+                        <h2 class="topic">Compagnes</h2>
+                    </div>
 
-					<img src= "/images/compagnes.png"
-						alt="Views">
-				</div>
+                    <img src="/images/compagnes.png" alt="Views">
+                </div>
+            </div>
 
-				<div class="box box2">
-					<div class="text">
-						<h2 class="topic-heading">150</h2>
-						<h2 class="topic">Likes</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
-						alt="likes">
-				</div>
-
-				<div class="box box3">
-					<div class="text">
-						<h2 class="topic-heading">320</h2>
-						<h2 class="topic">Comments</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-						alt="comments">
-				</div>
-
-				<div class="box box4">
-					<div class="text">
-						<h2 class="topic-heading">70</h2>
-						<h2 class="topic">Published</h2>
-					</div>
-
-					<img src=
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
-				</div>
-			</div>
-
-
-
-
-
-			<div class="report-container">
+            <div class="report-container min-w-full">
                 <div class="report-header">
                     <h1 class="recent-Articles">Liste des Compagnes</h1>
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="compagneSearchInput" name="username" class="me-16 peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher" />
+                            <label for="compagneSearchInput" onkeyup="searchLeads()" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
                     <span class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800">
                         <a href="{{ route('compagnes.index') }}#user-form" onclick="scrollToForm()">Créer Compagne</a>
                     </span>
-                    <input type="text" id="compagneSearchInput" placeholder="Rechercher..." class="mt-3 px-3 py-2 border rounded-md">
+
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
-                    <table class="w-full text-sm text-left rtl:text-right text-slate-800 dark:text-slate-800">
-                        <thead class="text-xs text-gray-200 uppercase bg-gray-50 dark:bg-cyan-900 dark:text-gray-200">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">ID</th>
-                                <th scope="col" class="px-6 py-3">Titre</th>
-                                <th scope="col" class="px-6 py-3">Contenu</th>
-                                <th scope="col" class="px-6 py-3">Slogan</th>
-                                <th scope="col" class="px-6 py-3">Leads</th>
-                                <th scope="col" class="px-6 py-3">Date limite</th>
-                                <th scope="col" class="px-6 py-3">Image</th>
-                                <th scope="col" class="px-6 py-3">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $leads = DB::table('leads')->get();
-                                $compagnes = DB::table('compagnes')->get();
-                            @endphp
-                            @foreach ($compagnes as $compagne)
+                    <div x-data="{ openModal: false }">
+                        <table class="w-full text-sm text-left rtl:text-right text-slate-800 dark:text-slate-800">
+                            <thead class="text-xs text-gray-200 uppercase bg-gray-50 dark:bg-cyan-900 dark:text-gray-200">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">ID</th>
+                                    <th scope="col" class="px-6 py-3">Titre</th>
+                                    <th scope="col" class="px-6 py-3">Contenu</th>
+                                    <th scope="col" class="px-6 py-3">Slogan</th>
+                                    <th scope="col" class="px-6 py-3">Leads</th>
+                                    <th scope="col" class="px-6 py-3">Date limite</th>
+                                    <th scope="col" class="px-6 py-3">Image</th>
+                                    <th scope="col" class="px-6 py-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($compagnes as $compagne)
                                 <tr class="compagne-item border-b even:bg-slate-300 odd:bg-slate-400">
                                     <td class="px-6 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-cyan-800">{{ $compagne->id }}</td>
                                     <td class="px-6 py-1">{{ $compagne->title }}</td>
@@ -142,52 +105,75 @@
                                     <td class="px-6 py-1">{{ $compagne->slogan }}</td>
                                     <td class="px-6 py-1">
                                         <ol>
-                                            @php
-                                                $leadNames = [];
-                                                $leadIds = DB::table('compagne_lead')->where('compagne_id', $compagne->id)->pluck('lead_id')->toArray();
-                                                foreach ($leadIds as $leadId) {
-                                                    $lead = $leads->firstWhere('id', $leadId);
-                                                    if ($lead) {
-                                                        $leadNames[] = $lead->nom;
-                                                    }
-                                                }
-                                                echo implode(', ', $leadNames);
-                                            @endphp
+                                            @foreach ($compagne->leads as $lead)
+                                            <li>{{ $lead->nom }}</li>
+                                            @endforeach
                                         </ol>
                                     </td>
                                     <td class="px-6 py-1">{{ $compagne->date_limite }}</td>
-                                    <td class="px-3 py-1"><img src="{{ Storage::url($compagne->image) }}" alt="{{ $compagne->title }}" class="h-20 w-20"></td>
-                                    <td class="ps-3 py-1">
-                                        <span class="inline-flex rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('modifiercompagne.index', ['id' => $compagne->id]) }}" class="accepter">
-                                                <img src="/images/editer.png" alt="editer">
+
+                                    <td class="px-3 py-1">
+                                        <!-- Modal toggle -->
+                                        <button @click="openModal = true" class="inline-flex hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+                                            Voir l'image
+                                        </button>
+
+                                        <!-- Main modal -->
+                                        <div x-show="openModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" class="z-50 fixed inset-0 flex items-center justify-center" x-cloak>
+                                            <div class="fixed inset-0 bg-black opacity-50" @click="openModal = false"></div>
+                                            <div class="relative p-4 w-full max-w-xl max-h-full">
+                                                <!-- Modal content -->
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <!-- Modal header -->
+                                                    <div class="flex items-center justify-between p-3 md:p-5 border-b rounded-t dark:border-gray-600 h-6">
+                                                        <a @click="openModal = false" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                            </svg>
+                                                            <span class="sr-only">Close modal</span>
+                                                        </a>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="p-2 md:p-0 space-y-2">
+                                                        <img src="{{ Storage::url($compagne->image) }}" alt="{{ $compagne->title }}" class="h-full w-full object-contain">
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 h-5">
+                                                        <button @click="openModal = false" type="button" class="py-1 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Fermer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-1">
+                                        <div class="grid grid-cols-1 sm:grid-cols-1 lg:flex lg:space-x-4 gap-y-4">
+                                            <a href="{{ route('modifiercompagne.index', ['id' => $compagne->id]) }}" class="ml-4 text-blue-900 hover:text-blue-700 transform hover:scale-110 transition duration-200">
+                                                <i class="fa-solid fa-pen-to-square fa-2xl"></i>
                                             </a>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-red-900 hover:text-slate-400">
-                                            <button onclick="openDeleteModal('{{ route('deletecompagne', ['id' => $compagne->id]) }}')">
-                                                <img src="/images/supprimer.png" alt="supprimer">
+
+                                            <button onclick="openDeleteModal('{{ route('deletecompagne', ['id' => $compagne->id]) }}')" class="text-red-700 hover:text-red-500 transform hover:scale-110 transition duration-200">
+                                                <i class="fa-solid fa-trash-can fa-2xl"></i>
                                             </button>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('email.envoyer', ['id' => $compagne->id]) }}" class="btn btn-send">
-                                                <img src="/images/email.png" alt="editer">
+
+                                            <a href="{{ route('email.envoyer', ['id' => $compagne->id]) }}" class="ml-4 text-slate-950 hover:text-sky-800 transform hover:scale-110 transition duration-200">
+                                                <i class="fa-solid fa-envelope-open-text fa-2xl"></i>
                                             </a>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('sms.envoyer', ['id' => $compagne->id]) }}" class="btn btn-send">
-                                                <img src="/images/sms.png" alt="editer">
+
+                                            <a href="{{ route('sms.envoyer', ['id' => $compagne->id]) }}" class="ml-4 text-slate-950 hover:text-sky-800 transform hover:scale-110 transition duration-200">
+                                                <i class="fa-solid fa-comment-sms fa-2xl"></i>
                                             </a>
-                                        </span>
-                                        <span class="inline-block rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
-                                            <a href="{{ route('compagnes.share', ['id' => $compagne->id]) }}">
-                                                <img src="/images/partage.png" alt="">
+
+                                            <a href="{{ route('compagnes.share', ['id' => $compagne->id]) }}" class="ml-4 text-slate-950 hover:text-sky-800 transform hover:scale-110 transition duration-200">
+                                                <i class="fa-solid fa-share-nodes fa-2xl"></i>
                                             </a>
-                                        </span>
+                                        </div>
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -208,152 +194,138 @@
                 </div>
             </div>
 
+            <div class="report-container mt-12 pt-8 px-3 hidden" id="user-form">
+                <div class="form-container max-w-lg mx-auto">
+                    <h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Compagne</h1>
 
+                    <form action="{{ route('creercompagne') }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto">
+                        @csrf
 
+                        <!-- Titre de la compagne -->
+                        <div class="mb-5">
+                            <label for="compagne_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Titre de la Compagne</label>
+                            <input type="text" id="compagne_title" name="compagne_title" required placeholder="Titre de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                            @error('compagne_title')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
-		<div class="report-container mt-12 pt-8 px-3 hidden" id="user-form">
-			<div class="form-container max-w-lg mx-auto">
-				<h1 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Compagne</h1>
+                        <!-- Slogan de la compagne -->
+                        <div class="mb-5">
+                            <label for="compagne_slogan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Slogan de la Compagne</label>
+                            <input type="text" id="compagne_slogan" name="compagne_slogan" required placeholder="Slogan de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                            @error('compagne_slogan')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
+                        <!-- Texte de la compagne -->
+                        <div class="mb-5">
+                            <label for="text_compagne" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Texte de la Compagne</label>
+                            <textarea id="text_compagne" name="text_compagne" required rows="4" placeholder="Texte de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
+                            @error('text_compagne')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
+                        <!-- Image de la compagne -->
+                        <div class="mb-5">
+                            <label for="compagne_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Image</label>
+                            <input type="file" id="compagne_image" name="compagne_image" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                            @error('compagne_image')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
-				<form action="{{route('creercompagne')}}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto">
-					@csrf
+                        <!-- Date de création de la compagne -->
+                        <div class="mb-5">
+                            <label for="compagne_date_limite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Date Limite</label>
+                            <input type="date" id="compagne_date_limite" required name="compagne_date_limite" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                            @error('compagne_date_limite')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
-					<!-- Titre de la compagne -->
-					<div class="mb-5">
-						<label for="compagne_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Titre de la Compagne</label>
-						<input type="text" id="compagne_title" name="compagne_title" placeholder="Titre de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-						@error('compagne_title')
-						<span class="error">{{ $message }}</span>
-						@enderror
-					</div>
+                        <!-- Champs pour le choix des leads -->
+                        <div class="mb-5">
+                            <label for="lead_options" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Choisir les Leads</label>
+                            <select id="lead_options" name="lead_option" onchange="showConditionalFields()" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                <option>selectionner</option>
+                                <option value="lead_sources">Lead Sources</option>
+                                <option value="products">Produits</option>
+                                <option value="lead_types">Types de Leads</option>
+                                <option value="all_leads">Tous les Leads</option>
+                            </select>
+                            @error('lead_option')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
-					<!-- Slogan de la compagne -->
-					<div class="mb-5">
-						<label for="compagne_slogan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Slogan de la Compagne</label>
-						<input type="text" id="compagne_slogan" name="compagne_slogan" placeholder="Slogan de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-						@error('compagne_slogan')
-						<span class="error">{{ $message }}</span>
-						@enderror
-					</div>
+                        <!-- Champs conditionnels en fonction de l'option sélectionnée -->
+                        <div class="mb-5 conditional-field" id="source-id-condition" style="display: none;">
+                            <label for="source_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner la source de lead</label>
+                            <select id="source_id" name="source_id" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                @php
+                                $sources = DB::table('lead_sources')->get();
+                                @endphp
+                                @foreach($sources as $source)
+                                <option value="{{ $source->id }}">{{ $source->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('source_id')
+                            <div>
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
 
-					<!-- Texte de la compagne -->
-					<div class="mb-5">
-						<label for="text_compagne" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Texte de la Compagne</label>
-						<textarea id="text_compagne" name="text_compagne" rows="4" placeholder="Texte de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
-						@error('text_compagne')
-						<span class="error">{{ $message }}</span>
-						@enderror
-					</div>
+                        <div class="mb-5 conditional-field" id="product-condition" style="display: none;">
+                            <label for="product_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner le produit</label>
+                            <select id="product_id" name="product_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                @php
+                                $products = DB::table('products')->get();
+                                @endphp
+                                @foreach($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->nom }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-					<!-- Image de la compagne -->
-					<div class="mb-5">
-						<label for="compagne_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Image</label>
-						<input type="file" id="compagne_image" name="compagne_image" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-						@error('compagne_image')
-						<span class="error">{{ $message }}</span>
-						@enderror
-					</div>
+                        <div class="mb-5 conditional-field" id="lead-type-id-condition" style="display: none;">
+                            <label for="lead_type_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner le type de lead</label>
+                            <select id="lead_type_id" name="lead_type_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                @php
+                                $types = DB::table('lead_types')->get();
+                                @endphp
+                                @foreach($types as $type)
+                                <option value="{{ $type->id }}">{{ $type->nom }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-					<!-- Date de création de la compagne -->
-					<div class="mb-5">
-						<label for="compagne_date_limite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Date Limite</label>
-						<input type="date" id="compagne_date_limite" name="compagne_date_limite" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-						@error('compagne_date_limite')
-						<span class="error">{{ $message }}</span>
-						@enderror
-					</div>
-
-					<!-- Champs pour le choix des leads -->
-
-
-
-					<div class="mb-5">
-						<label for="lead_options" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Choisir les Leads</label>
-						<select id="lead_options" name="lead_option" onchange="showConditionalFields()" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-							<option>selectionner </option>
-							<option value="lead_sources">Lead Sources</option>
-							<option value="products">Produits</option>
-							<option value="lead_types">Types de Leads</option>
-							<option value="all_leads">Tous les Leads</option>
-						</select>
-					</div>
-
-					<!-- Champs conditionnels en fonction de l'option sélectionnée -->
-
-					<div class="mb-5 conditional-field" id="source-id-condition" style="display: none;">
-						<label for="source_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner la source de lead</label>
-						<select id="source_id" name="source_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-							@php
-							//
-							$sources = DB::table('lead_sources')->get();
-							@endphp
-							@foreach($sources as $source)
-							<option value="{{$source->id}}">{{$source->name}}</option>
-							@endforeach
-						</select>
-					</div>
-
-
-
-					<div class=" mb-5 conditional-field" id="product-condition" style="display: none;">
-						<label for="product_id"  class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner le produit</label>
-						   <select id="product_id" name="product_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-							@php
-							//
-							$products = DB::table('products')->get();
-							@endphp
-							@foreach($products as $product)
-								   <option value="{{$product->id}}">{{$product->nom}}</option>
-								   @endforeach
-
-								  </select>
-								  </div>
-
-								  <div class=" mb-5 conditional-field" id="lead-type-id-condition" style="display: none;">
-									<label for="lead_type_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Sélectionner le type de lead</label>
-									  <select id="lead_type_id" name="lead_type_id" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-									   @php
-									   //
-									   $types = DB::table('lead_types')->get();
-									   @endphp
-									   @foreach($types as $type)
-										   <option value="{{$type->id}}">{{$type->nom}}</option>
-										@endforeach
-									   </select>
-
-								  </div>
-
-					<input type="hidden" id="compagne_leads" name="compagne_leads" value=''>
-
-					<!-- Boutons de soumission -->
-					<div class="text-center">
-						<button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Créer</button>
-						<a href="#" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
-
-					</div>
-				</form>
-			</div>
-		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	</div>
+                        <input type="hidden" id="compagne_leads" name="compagne_leads" value=''>
+                        <!-- Boutons de soumission -->
+                        <div class="text-center">
+                            <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Créer</button>
+                            <a href="#" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

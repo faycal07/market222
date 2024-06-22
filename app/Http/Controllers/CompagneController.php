@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use auth;
 use App\Models\Lead;
 use App\Models\Product;
 use App\Models\Compagne;
 use App\Models\LeadSource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,36 +23,70 @@ class CompagneController extends Controller
      */
     public function index()
     {
-     $compagnes=Compagne::all();
+        $user_id = auth()->id();
+
+    // Charger les campagnes de l'utilisateur connecté avec leurs leads associés
+    $compagnes = Compagne::where('user_id', $user_id)
+                    ->with(['leads' => function ($query) {
+                        // Sélectionner les colonnes nécessaires à partir de la table compagne_lead
+                        $query->select('leads.*');
+                    }])
+                    ->get();
 
            return view('compagnes',compact('compagnes'));
 
 
     }
+
+
     public function shareOn($id, Request $request)
     {
-        // Récupérer la compagnes spécifique par son ID
+        // Retrieve the specific campaign by its ID
         $compagne = Compagne::findOrFail($id);
 
-        $sharebuttons=\Share::page(
-            $compagne->text_compagne,
-            $compagne->image,
+        // Build custom share URLs
+        $url = url('/compagnes/' . $compagne->id);
+        $title = $compagne->title;
+        $slogan = $compagne->slogan;
+        $text = $compagne->text_compagne;
+        $image = Storage::url($compagne->image);
+
+        $sharebuttons = [
+            'facebook' => "https://www.facebook.com/sharer/sharer.php?u={$url}&title={$title}&description={$slogan}&picture={$image}",
+            'twitter' => "https://twitter.com/intent/tweet?url={$url}&text={$title} - {$slogan}&via=your_twitter_handle",
+            'linkedin' => "https://www.linkedin.com/shareArticle?mini=true&url={$url}&title={$title}&summary={$slogan}",
+            'whatsapp' => "https://api.whatsapp.com/send?text={$title} - {$slogan} {$url}",
+            'telegram' => "https://telegram.me/share/url?url={$url}&text={$title} - {$slogan}",
+            'reddit' => "https://www.reddit.com/submit?url={$url}&title={$title}",
+            'pinterest' => "https://pinterest.com/pin/create/button/?url={$url}&media={$image}&description={$title} - {$slogan}"
+        ];
+
+        return view('post', compact('compagne', 'sharebuttons'));
+    }
+    // public function shareOn($id, Request $request)
+    // {
+    //     // Récupérer la compagnes spécifique par son ID
+    //     $compagne = Compagne::findOrFail($id);
+
+    //     $sharebuttons=\Share::page(
+    //         $compagne->text_compagne,
+    //         $compagne->image,
 
 
 
-        )->facebook()
-        ->telegram()
-        ->linkedin()
-        ->whatsapp()
-        ->reddit()
-        ->twitter()
-        ->pinterest()->getRawLinks();
-        // dd($sharebuttons);
+    //     )->facebook()
+    //     ->telegram()
+    //     ->linkedin()
+    //     ->whatsapp()
+    //     ->reddit()
+    //     ->twitter()
+    //     ->pinterest()->getRawLinks();
+    //     // dd($sharebuttons);
 
-        return view('post',compact('compagne','sharebuttons'));
+    //     return view('post',compact('compagne','sharebuttons'));
 
-      // return view('compagnes', compact('compagne'));
-        }
+    //   // return view('compagnes', compact('compagne'));
+    //     }
 
     /**
      * Afficher le formulaire de création d'une compagne.
@@ -240,12 +276,15 @@ public function store(Request $request)
             break;
     }
 
+    $user_id = auth()->id();
+
     // Création d'une nouvelle compagne
     $compagne = Compagne::create([
         'title' => $request->input('compagne_title'),
         'slogan' => $request->input('compagne_slogan'),
         'text_compagne' => $request->input('text_compagne'),
         'date_limite' => $request->input('compagne_date_limite'),
+        'user_id'=>$user_id,
     ]);
 
     // Traitement de l'image de la compagne

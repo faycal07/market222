@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('css/formulaire.css') }}">
     @vite('resources/css/app.css')
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 
 
 </head>
@@ -28,15 +29,7 @@
 
       <div class="report-container mt-12 pt-8 px-3" id="user-form">
 
-        @if ($errors->any())
-        <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+
 
         @if (session('success'))
         <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
@@ -67,6 +60,12 @@
 							<option value="inactive">inactive</option>
 
 						</select>
+                        @error('status')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 					<!-- Champs pour le choix des d'evenement  -->
@@ -79,6 +78,12 @@
 							<option value="3">envoyer un email de remercement pour lead won</option>
 							<option value="4">envoyer un email de remercement pour lead lost </option>
 						</select>
+                        @error('event')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
 					</div>
 
 
@@ -86,7 +91,8 @@
 					<!-- Boutons de soumission -->
 					<div class="text-center">
 						<button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Modifier</button>
-					</div>
+                        <a href="{{route('workflows.index')}}" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+                    </div>
           </form>
         </div>
       </div>

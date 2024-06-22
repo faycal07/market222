@@ -22,6 +22,7 @@ class CreateTemplatesTable extends Migration
             $table->string('telephone', 255)->nullable();
             $table->string('adresse', 255)->nullable();
             $table->string('logo');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
