@@ -21,6 +21,7 @@ class CreateEmailsTable extends Migration
             $table->text('body'); // HTML or plaintext content
             $table->string('attachments')->nullable(); // JSON or serialized data for attachments
             $table->unsignedBigInteger('template_id')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
 

@@ -43,7 +43,7 @@
                 @endif
 						<div class="form-container">
 
-							<form action="{{ route('modifieruser', ['id' => $user->id]) }}" method="POST" class="user-form">
+							<form action="{{ route('modifieruser', ['id' => $user->id]) }}" method="POST" class="user-form" enctype="multipart/form-data">
 								@csrf
 								@method('PUT')
 
@@ -99,6 +99,17 @@
                                     </div>
 
                                     @enderror
+                                    </div>
+
+                                    <div class="form-group mb-5">
+                                        <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Photo:</label>
+                                        <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg, image/gif, image/svg+xml" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+
+                                        @error('photo')
+                                        <div>
+                                            {{$message}}
+                                        </div>
+                                        @enderror
                                     </div>
 								<div class="flex items-center justify-center h-16">
 									<button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Modifier</button>

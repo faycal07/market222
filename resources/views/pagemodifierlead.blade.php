@@ -54,18 +54,39 @@
                                 <input type="text" id="nom" name="nom" value="{{$lead->nom}}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="Nom de Lead">
+
+                                @error('nom')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">E-Mail:</label>
                                 <input type="email" id="email" name="email" value="{{$lead->email}}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="E-Mail">
+
+                                @error('email')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="tel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Téléphone:</label>
                                 <input type="number" id="tel" name="tel" value="{{$lead->tel}}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="Téléphone">
+
+                                @error('tel')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="types_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Type:</label>
@@ -74,6 +95,14 @@
                                     <option value="1" @if($lead->types_id == '1') selected @endif>Existant</option>
                                     <option value="2" @if($lead->types_id == '2') selected @endif>Nouveau</option>
                                 </select>
+
+
+                                @error('types_id')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="sources_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Source:</label>
@@ -85,6 +114,13 @@
                                     <option value="4" @if($lead->sources_id == '4') selected @endif>Direct</option>
                                     <option value="5" @if($lead->sources_id == '5') selected @endif>Formulaire</option>
                                 </select>
+
+                                @error('sources_id')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="produit_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Produits:</label>
@@ -94,6 +130,13 @@
                                     <option value="{{ $product->id }}" @if(in_array($product->id, $lead->products->pluck('id')->toArray())) selected @endif>{{ $product->nom }}</option>
                                     @endforeach
                                 </select>
+
+                                @error('produit_id[]')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
 
 
@@ -107,6 +150,12 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('opportunite_id')
+                                <div>
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
 
                             <div class="flex items-center justify-center h-16">

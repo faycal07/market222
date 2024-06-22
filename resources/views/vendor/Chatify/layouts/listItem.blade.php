@@ -10,8 +10,8 @@
             </td>
             {{-- center side --}}
             <td>
-                <p data-id="{{ Auth::user()->id }}" data-type="user">Saved Messages <span>You</span></p>
-                <span>Save messages secretly</span>
+                <p data-id="{{ Auth::user()->id }}" data-type="user">Sauvegarder des messages <span>toi</span></p>
+                <span>Sauvegarder des messages secrètement</span>
             </td>
         </tr>
     </table>
@@ -64,23 +64,28 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
 
 {{-- -------------------- Search Item -------------------- --}}
 @if($get == 'search_item')
-<table class="messenger-list-item" data-contact="{{ $user->id }}">
-    <tr data-action="0">
-        {{-- Avatar side --}}
-        <td>
-        <div class="avatar av-m"
-        style="background-image: url('{{ $user->avatar }}');">
-        </div>
-        </td>
-        {{-- center side --}}
-        <td>
-            <p data-id="{{ $user->id }}" data-type="user">
-            {{ strlen($user->name) > 12 ? trim(substr($user->name,0,12)).'..' : $user->name }}
-        </td>
-
-    </tr>
-</table>
+    <table class="messenger-list-item" data-contact="{{ $user->id }}">
+        <tr data-action="0">
+            {{-- Avatar side --}}
+            <td>
+                @if($user->photo)
+                    <div class="avatar av-m" style="background-image: url('{{ asset('storage/photos/' . $user->photo) }}');">
+                    </div>
+                @else
+                    <div class="avatar av-m" style="background-image: url('{{ $user->avatar }}');">
+                    </div>
+                @endif
+            </td>
+            {{-- Center side --}}
+            <td>
+                <p data-id="{{ $user->id }}" data-type="user">
+                    {{ strlen($user->name) > 12 ? trim(substr($user->name,0,12)).'..' : $user->name }}
+                </p>
+            </td>
+        </tr>
+    </table>
 @endif
+
 
 {{-- -------------------- Shared photos Item -------------------- --}}
 @if($get == 'sharedPhoto')

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('opportunite_id')->nullable();
             $table->unsignedBigInteger('stage_id')->nullable();
 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
 
 
             $table->foreign('types_id')->references('id')->on('lead_types');

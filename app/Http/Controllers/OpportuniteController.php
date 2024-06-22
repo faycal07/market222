@@ -15,9 +15,12 @@ class OpportuniteController extends Controller
      */
     public function index()
     {
+        // Récupérer l'ID de l'utilisateur connecté
+        $user_id = auth()->id();
+
         // Charger les opportunités avec leurs stages associés
-        $opportunites = Opportunite::with('stages')->get();
-        $stages= Stage::all();
+        $opportunites = Opportunite::with('stages')->where('user_id', $user_id)->get();
+        $stages = Stage::all();
 
         return view('opportunites', compact('opportunites','stages'));
     }
@@ -41,22 +44,28 @@ class OpportuniteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'stages_id' => 'required|array',
-            'stages_id.*' => 'exists:stages,id', // Vérifie que chaque identifiant de stage existe dans la table des stages
-        ]);
+{
+    $request->validate([
+        'nom' => 'required|string|max:255',
+        'stages_id' => 'required|array',
+        'stages_id.*' => 'exists:stages,id', // Vérifie que chaque identifiant de stage existe dans la table des stages
+    ]);
 
-        $opportunite = new Opportunite();
-        $opportunite->nom = $request->input('nom');
-        $opportunite->save();
+    // Récupérer l'ID de l'utilisateur connecté
+    $user_id = auth()->id();
 
-        // Attache les stages sélectionnés à l'opportunité nouvellement créée
-        $opportunite->stages()->attach($request->input('stages_id'));
+    // Créer une nouvelle opportunité et lui attribuer l'ID de l'utilisateur connecté
+    $opportunite = new Opportunite();
+    $opportunite->nom = $request->input('nom');
+    $opportunite->user_id = $user_id; // Attribuer l'ID de l'utilisateur connecté
+    $opportunite->save();
 
-        return redirect()->route('opportunites.index')->with('success', 'Opportunité créée avec succès !');
-    }
+    // Attacher les stages sélectionnés à l'opportunité nouvellement créée
+    $opportunite->stages()->attach($request->input('stages_id'));
+
+    return redirect()->route('opportunites.index')->with('success', 'Opportunité créée avec succès !');
+}
+
     public function modifieropportuniteindex($id)
     {
         $opportunite=Opportunite::findOrFail($id);
