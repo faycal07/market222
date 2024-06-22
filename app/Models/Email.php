@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Template;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +19,8 @@ class Email extends Model
         'subject',
         'body',
         'attachments',
-        'template_id'
+        'template_id',
+        'user_id',
     ];
 
     /**
@@ -33,4 +36,9 @@ class Email extends Model
     {
         return $this->belongsTo(Template::class);
     }
+
+    public function user()
+  {
+      return $this->belongsTo(User::class);
+  }
 }

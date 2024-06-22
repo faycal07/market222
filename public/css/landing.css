@@ -1,0 +1,87 @@
+body {
+    background-image: url('../images/backimg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* Media queries pour des ajustements supplémentaires */
+
+
+@media (max-width: 768px) {
+    body {
+        background-size: cover;
+        background-position: top;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-size: cover;
+        background-position: top;
+    }
+}
+
+    /* hamburger menu */
+    .hamburger{
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        transition: all 0.25s;
+        position: relative;
+    }
+
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom{
+position:absolute;
+top: 0;
+left: 0;
+width: 24px;
+height: 2px;
+background: #000;
+transform: rotate(0);
+transition: all 0.5s;
+
+}
+
+.hamburger-middle{
+    transform: translateY(7px);
+}
+.hamburger-bottom{
+    transform: translateY(14px);
+}
+
+.open{
+    transform: rotate(90deg);
+    transform: translateY(0px);
+
+}
+
+.open .hamburger-top{
+    transform: rotate(45deg) translateY(6px) translate(6px);
+}
+
+.open .hamburger-middle{
+    display: none;
+}
+.open .hamburger-bottom{
+    transform: rotate(-45deg) translateY(6px) translate(-6px);
+}
+.text-stroke {
+    -webkit-text-stroke: 2px rgb(0, 89, 140); /* Adjust the width and color as needed */
+    text-stroke: 3px rgb(1, 115, 123); /* For other browsers supporting text stroke */
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #D4AF37, #ccb100, #94d301, #00a8b7); /* Darker colors */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-stroke: 0.5px #003B6E; /* Adjusted stroke color */
+    text-stroke: 0.5px #003B6E; /* Adjusted stroke color */
+    text-fill-color: transparent;
+}
+ 

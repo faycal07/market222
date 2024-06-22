@@ -40,6 +40,8 @@ class TemplateController extends Controller
             'telephone' => 'required|string',
             'adresse' => 'required|string',
         ]);
+
+        $user_id = auth()->id();
         try {
 
         // Créer un nouveau template avec les données validées
@@ -51,6 +53,7 @@ class TemplateController extends Controller
             'email' => $request->email,
             'telephone' => $request->telephone,
             'adresse' => $request->adresse,
+            'user_id'=>$user_id,
         ]);
 
          // Traitement de l'image de la compagne

@@ -12,6 +12,7 @@ class CreateOpportunitesTable extends Migration
             $table->id();
             $table->string('nom')->nullable();
             $table->boolean('is_default')->default(false);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

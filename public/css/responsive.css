@@ -16,7 +16,12 @@
     } 
     } 
     
-    @media screen and (max-width: 850px) { 
+    @media screen and (max-width: 1118px) { 
+        .recent-Articles { 
+            margin-top: 10px;
+            margin-bottom: 0px;
+            font-size: 28px; 
+        } 
     .nav-img { 
         height: 30px; 
     } 
@@ -49,6 +54,7 @@
         display: none; 
     } 
     .main { 
+        margin-top: 0px;
         padding: 40px 30px 30px 30px; 
     } 
     .searchbar2 { 
@@ -69,6 +75,7 @@
     } 
     
     @media screen and (max-width: 490px) { 
+      
     .message { 
         display: none; 
     } 
@@ -95,7 +102,9 @@
         gap: 15px; 
     } 
     .recent-Articles { 
-        font-size: 20px; 
+        margin-top: 10px;
+        margin-bottom: 0px;
+        font-size: 28px; 
     } 
     .report-topic-heading, 
     .item1, 
@@ -104,7 +113,7 @@
     } 
     } 
     
-    @media screen and (max-width: 400px) { 
+    @media screen and (max-width: 640px) { 
     .recent-Articles { 
         font-size: 17px; 
     } 
@@ -113,9 +122,14 @@
         font-size: 10px; 
         height: 27px; 
     } 
+   
     .report-header { 
-        height: 60px; 
-        padding: 10px 10px 5px 10px; 
+        height: 200px; 
+        padding: 0px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Optional: Center elements horizontally */
+        gap: 0px; /* Optional: Add spacing between elements */
     } 
     .searchbtn img { 
         height: 20px; 
@@ -124,7 +138,9 @@
     
     @media screen and (max-width: 320px) { 
     .recent-Articles { 
-        font-size: 12px; 
+        margin-top: 10px;
+        margin-bottom: 0px;
+        font-size: 19px; 
     } 
     .view { 
         width: 50px; 
@@ -132,8 +148,12 @@
         height: 27px; 
     } 
     .report-header { 
-        height: 60px; 
-        padding: 10px 5px 5px 5px; 
+        height: 200px; 
+        padding: 0px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Optional: Center elements horizontally */
+        gap: 0px; /* Optional: Add spacing between elements */
     } 
     .t-op { 
         font-size: 12px; 
@@ -155,8 +175,13 @@
     .searchbtn { 
         width: 40px; 
     } 
-    .searchbar2 input { 
-        width: 180px; 
-    } 
+   
     }
-    
+    @media screen and (max-width: 767px) { /* Target small screens */
+        .recent-Articles {
+          /* font-size: 20px;  */
+          font-size:small;
+        }
+      }
+      
+      

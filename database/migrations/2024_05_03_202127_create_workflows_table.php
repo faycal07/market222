@@ -21,6 +21,7 @@ class CreateWorkflowsTable extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->integer('priority')->nullable();
             $table->json('conditions')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

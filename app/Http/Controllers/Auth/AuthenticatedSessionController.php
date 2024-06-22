@@ -75,36 +75,41 @@ public function store(LoginRequest $request): RedirectResponse
 
     }
     public function storeuser(Request $request)
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'string'],
-        ], [
-            'password.min' => 'Le mot de passe doit comporter au moins :min caractères.',
-            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'role' => ['required', 'string'],
+        'photo' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+    ], [
+        'password.min' => 'Le mot de passe doit comporter au moins :min caractères.',
+        'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+    ]);
 
-        try {
-
-            // Créer un nouvel utilisateur
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
-            ]);
-
-            return redirect()->route('users.index')->with('success', 'Utilisateur crée avec succès!');
-
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->with('error', 'Erreur lors de la creation de l\'utilisateur: ' . $e->getMessage());
+    try {
+        $photo = null;
+        if ($request->hasFile('photo')) {
+            // Enregistrer l'image
+            $photoPath = $request->file('photo')->store('public/photos');
+            $photo = basename($photoPath); // Récupérer uniquement le nom du fichier
         }
 
+        // Créer un nouvel utilisateur avec la photo
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $user->photo = $photo;
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Utilisateur créé avec succès!');
+
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->with('error', 'Erreur lors de la création de l\'utilisateur: ' . $e->getMessage());
     }
-
-
+}
 
     public function modifieruserindex($id)
     {
@@ -115,7 +120,8 @@ public function store(LoginRequest $request): RedirectResponse
         return view('modifieruser', compact('user'));
     }
 
-    public function modifieruser(Request $request, $id)
+
+        public function modifieruser(Request $request, $id)
 {
     // Valider les données du formulaire
     $request->validate([
@@ -123,12 +129,22 @@ public function store(LoginRequest $request): RedirectResponse
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
         'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         'role' => ['required', 'string'],
+        'photo' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
     ], [
         'password.min' => 'Le mot de passe doit comporter au moins :min caractères.',
         'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
     ]);
 
     try {
+
+        $photo = null;
+        if ($request->hasFile('photo')) {
+            // Enregistrer l'image
+            $photoPath = $request->file('photo')->store('public/photos');
+            $photo = basename($photoPath); // Récupérer uniquement le nom du fichier
+        }
+
+
         // Trouver l'utilisateur à modifier
         $user = User::findOrFail($id);
 
@@ -139,6 +155,8 @@ public function store(LoginRequest $request): RedirectResponse
             $user->password = Hash::make($request->password);
         }
         $user->role = $request->role;
+        $user->photo = $photo;
+
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'Utilisateur modifié avec succès!');
