@@ -54,11 +54,25 @@ class TemplateController extends Controller
                 'user_id' => $user_id,
             ]);
 
+<<<<<<< HEAD
             // Traitement de l'image de la compagne
             if ($request->hasFile('logo')) {
                 $imagePath = $request->file('logo')->store('public/images');
                 $template->logo = $imagePath;
             }
+=======
+        // Créer un nouveau template avec les données validées
+        $template = new Template([
+            'nom' => $request->nom,
+            'subject' => $request->subject,
+            'mobile' => $request->mobile,
+            'web' => $request->web,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+            'user_id'=>$user_id,
+        ]);
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
 
             // Sauvegarder le nouveau template
             $template->save();
