@@ -36,7 +36,22 @@
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
 
+             <nav class="bg-sky-950 p-2 shadow-md mb-5 rounded-2xl">
+                <div class="container mx-auto flex flex-wrap items-center justify-between">
+                    <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
+                        <img src="{{ asset('/images/menutel.png') }}" alt="menu" class="w-6 h-6">
+                    </button>
 
+                    <div class="hidden w-full lg:flex lg:flex-col lg:flex-grow lg:w-auto px-3" id="nav-contenttt">
+                        <div class="lg:inline-flex lg:flex-row lg:items-end lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+                            <a href="#userSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Utilisateurs</a>
+                            <a href="#userSectionarchiver" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Utilisateurs Archivés</a>
+                            <a href="#user-form" onclick="scrollToForm()" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Créer Utilisateur</a>
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
 			<div class="box-container">
 
 				<div class="box box1">
@@ -83,13 +98,24 @@
 			</div>
 
 
-			<div class="report-container">
+			<div class="report-container" id="userSection">
+
                 <div class="report-header">
                     <h1 class="recent-Articles">Utilisateurs</h1>
+
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="userSearchInput" name="username" class="peer bg-transparent h-8 w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="userSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
+
                     <span class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800">
                         <a href="{{ route('users.index') }}#user-form" onclick="scrollToForm()">Créer Utilisateur</a>
                     </span>
-                    <input type="text" id="userSearchInput" placeholder="Rechercher utilisateurs..." class="mt-3 px-3 py-2 border rounded-md">
+
                 </div>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
@@ -100,6 +126,7 @@
                                 <th scope="col" class="px-6 py-3">Nom</th>
                                 <th scope="col" class="px-6 py-3">Email</th>
                                 <th scope="col" class="px-6 py-3">Role</th>
+                                <th scope="col" class="px-6 py-3">Photo</th>
                                 <th scope="col" class="px-6 py-3">Actions</th>
                             </tr>
                         </thead>
@@ -111,6 +138,13 @@
                                         <td class="px-6 py-4">{{ $user->name }}</td>
                                         <td class="px-6 py-4">{{ $user->email }}</td>
                                         <td class="px-6 py-4">{{ $user->role }}</td>
+                                        <td class="px-6 py-4">
+                                            @if($user->photo)
+                                                <img src="{{ asset('storage/photos/' . $user->photo) }}" alt="Photo de profil de {{ $user->name }}" class="h-10 w-10 rounded-full">
+                                            @else
+                                                Pas de photo
+                                            @endif
+                                        </td>
                                         <td class="ps-6 py-0 my-0 mx-10">
                                             <span class="inline-flex rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
                                                 <a href="{{ route('modifieruser.index', ['id' => $user->id]) }}">
@@ -136,14 +170,23 @@
             </div>
 
 
-			<div class="report-container">
+			<div class="report-container" id="userSectionarchiver">
                 <div class="report-header">
                     <h1 class="recent-Articles">Liste des Utilisateurs Archivés</h1>
+
+                    <div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="archivedUserSearchInput" name="username" class="peer bg-transparent h-8 w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="archivedUserSearchInput" class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
+
+
                     <span class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800">
                         <a href="{{ route('users.index') }}#user-form" onclick="scrollToForm()">Créer Utilisateur</a>
 
                     </span>
-                    <input type="text" id="archivedUserSearchInput" placeholder="Rechercher utilisateurs archivés..." class="mt-3 px-3 py-2 border rounded-md">
+
                 </div>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
@@ -154,6 +197,7 @@
                                 <th scope="col" class="px-6 py-3">Nom</th>
                                 <th scope="col" class="px-6 py-3">Email</th>
                                 <th scope="col" class="px-6 py-3">Role</th>
+                                <th scope="col" class="px-6 py-3">Photo</th>
                                 <th scope="col" class="px-6 py-3">Actions</th>
                             </tr>
                         </thead>
@@ -165,6 +209,13 @@
                                         <td class="px-6 py-4">{{ $user->name }}</td>
                                         <td class="px-6 py-4">{{ $user->email }}</td>
                                         <td class="px-6 py-4">{{ $user->role }}</td>
+                                        <td class="px-6 py-4">
+                                            @if($user->photo)
+                                                <img src="{{ asset('storage/photos/' . $user->photo) }}" alt="Photo de profil de {{ $user->name }}" class="h-10 w-10 rounded-full">
+                                            @else
+                                                Pas de photo
+                                            @endif
+                                        </td>
                                         <td class="ps-6 py-0 my-0 mx-10">
                                             <span class="inline-flex rounded-md px-1 py-1 w-8 h-8 hover:bg-sky-900 hover:text-slate-400">
                                                 <a href="{{ route('modifieruser.index', ['id' => $user->id]) }}">
@@ -196,77 +247,81 @@
 
 
 
-			<div  id="user-form" class="report-container mt-5 pt-8 px-3 hidden">
-
-				<div class="form-container max-w-lg mx-auto ">
-
-						<h2 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Utilisateur</h2>
-						<form action="{{ route('creeruser') }}" method="POST" class="user-form" id="user-form1">
-                            @csrf
-                            <div class="form-group mb-5">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Nom d'utilisateur:</label>
-                                <input type="text" id="name" name="name" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Nom d'utilisateur">
+            <div id="user-form" class="report-container mt-5 pt-8 px-3 hidden">
+                <div class="form-container max-w-lg mx-auto">
+                    <h2 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Utilisateur</h2>
+                    <form action="{{ route('creeruser') }}" method="POST" class="user-form" id="user-form1" enctype="multipart/form-data" onsubmit="return validateForm()">
+                        @csrf
+                        <div class="form-group mb-5">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Nom d'utilisateur:</label>
+                            <span id="name-error" class="text-red-500 text-sm"></span>
+                            <input type="text" id="name" name="name" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Nom d'utilisateur">
                             @error('name')
-                            <div>
+                            <div class="text-red-500 text-sm">
                                 {{$message}}
                             </div>
-
                             @enderror
+                        </div>
+                        <div class="form-group mb-5">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Email:</label>
+                            <span id="email-error" class="text-red-500 text-sm"></span>
+                            <input type="email" id="email" name="email" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Email">
+                            @error('email')
+                            <div class="text-red-500 text-sm">
+                                {{$message}}
                             </div>
-
-                            <div class="form-group mb-5">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Email:</label>
-                                <input type="email" id="email" name="email" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Email">
-                                @error('email')
-                                <div>
-                                    {{$message}}
-                                </div>
-
-                                @enderror
+                            @enderror
+                        </div>
+                        <div class="form-group mb-5">
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Mot de passe:</label>
+                            <span id="password-error" class="text-red-500 text-sm"></span>
+                            <input type="password" id="password" name="password" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Mot de passe">
+                            @error('password')
+                            <div class="text-red-500 text-sm">
+                                {{$message}}
                             </div>
-
-                            <div class="form-group mb-5">
-                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Mot de passe:</label>
-                                <input type="password" id="password" name="password" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Mot de passe">
-                                @error('password')
-                                <div>
-                                    {{$message}}
-                                </div>
-
-                                @enderror
-                                </div>
-                            <div class="form-group mb-5">
-                                <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Confirmer le mot de passe:</label>
-                                <input type="password" id="password_confirmation" name="password_confirmation" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Confirmer le mot de passe">
-                                @error('password_confirmation')
-                                <div>
-                                    {{$message}}
-                                </div>
-
-                                @enderror
-                                </div>
-                            <div class="form-group mb-5">
-                                <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Rôle:</label>
-                                <select id="role" name="role" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-                                    <option value="admin">Admin</option>
-                                    <option value="marketing">Marketing</option>
-                                    <!-- Ajoutez d'autres options de rôle selon vos besoins -->
-                                </select>
-                                @error('role')
-                                <div>
-                                    {{$message}}
-                                </div>
-
-                                @enderror
-                                </div>
-                            <div class="flex items-center justify-center h-16">
-                                <button type="submit" id="submit-button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Créer</button>
-                                <a href="#" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-5">
+                            <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Confirmer le mot de passe:</label>
+                            <span id="password_confirmation-error" class="text-red-500 text-sm"></span>
+                            <input type="password" id="password_confirmation" name="password_confirmation" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Confirmer le mot de passe">
+                            @error('password_confirmation')
+                            <div class="text-red-500 text-sm">
+                                {{$message}}
                             </div>
-                        </form>
-
-					</div>
-				</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-5">
+                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Rôle:</label>
+                            <select id="role" name="role" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                <option value="admin">Admin</option>
+                                <option value="marketing">Marketing</option>
+                                <!-- Ajoutez d'autres options de rôle selon vos besoins -->
+                            </select>
+                            @error('role')
+                            <div class="text-red-500 text-sm">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-5">
+                            <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Photo:</label>
+                            <span id="photo-error" class="text-red-500 text-sm"></span>
+                            <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg, image/gif, image/svg+xml" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                            @error('photo')
+                            <div class="text-red-500 text-sm">
+                                {{$message}}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="flex items-center justify-center h-16">
+                            <button type="submit" id="submit-button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Créer</button>
+                            <a href="#" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
 
 
@@ -325,6 +380,33 @@ function searchUsers(inputId, tableBodyId, rowClass) {
 }
 
     </script>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        let password = document.getElementById('password').value;
+        let passwordConfirmation = document.getElementById('password_confirmation').value;
+        let passwordError = document.getElementById('password-error');
+        let passwordConfirmationError = document.getElementById('password_confirmation-error');
+
+        // Clear previous errors
+        passwordError.textContent = '';
+        passwordConfirmationError.textContent = '';
+
+        if (password.length < 8) {
+            passwordError.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+            isValid = false;
+        }
+
+        if (password !== passwordConfirmation) {
+            passwordConfirmationError.textContent = 'Les mots de passe ne correspondent pas.';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
 
 	<script src="{{ asset('js/index.js')}}"></script>
 </body>

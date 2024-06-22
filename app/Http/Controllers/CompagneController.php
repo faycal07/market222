@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use auth;
 use App\Models\Lead;
 use App\Models\Product;
 use App\Models\Compagne;
@@ -21,7 +22,15 @@ class CompagneController extends Controller
      */
     public function index()
     {
-     $compagnes=Compagne::all();
+        $user_id = auth()->id();
+
+    // Charger les campagnes de l'utilisateur connecté avec leurs leads associés
+    $compagnes = Compagne::where('user_id', $user_id)
+                    ->with(['leads' => function ($query) {
+                        // Sélectionner les colonnes nécessaires à partir de la table compagne_lead
+                        $query->select('leads.*');
+                    }])
+                    ->get();
 
            return view('compagnes',compact('compagnes'));
 
@@ -240,12 +249,15 @@ public function store(Request $request)
             break;
     }
 
+    $user_id = auth()->id();
+
     // Création d'une nouvelle compagne
     $compagne = Compagne::create([
         'title' => $request->input('compagne_title'),
         'slogan' => $request->input('compagne_slogan'),
         'text_compagne' => $request->input('text_compagne'),
         'date_limite' => $request->input('compagne_date_limite'),
+        'user_id'=>$user_id,
     ]);
 
     // Traitement de l'image de la compagne

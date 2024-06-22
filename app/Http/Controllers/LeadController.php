@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Lead;
-
+use App\Events\LeadWon;
 use App\Models\Product;
+use App\Events\LeadLost;
 use App\Models\Workflow;
 use App\Events\LeadUpdate;
 use App\Events\LeadCreated;
 use App\Models\Opportunite;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -37,15 +39,26 @@ class LeadController extends Controller
 
 
     public function pagelead() {
-        $opportunites = Opportunite::all();
+
+        $user_id = Auth::id();
+
+
         $products = Product::all();
-        $opportunites_et_leads = Opportunite::with('leads')->get();
-        // $leads = Lead::all();
-  // Fetch all leads along with their related information
-  $leads = Lead::with(['type', 'source', 'opportunite', 'stage', 'products'])->get();
+
+        $opportunites = Opportunite::where('user_id', $user_id)
+        ->with('leads')
+        ->get();
+
+
+    // Charger les leads de l'utilisateur connecté avec leurs détails associés
+    $leads = Lead::where('user_id', $user_id)
+                 ->with('type', 'source', 'opportunite', 'stage', 'products')
+                 ->get();
+
+
 
   // Pass the leads data to the view
-  return view('leads', compact('leads','products','opportunites','opportunites_et_leads'));
+  return view('leads', compact('leads','products','opportunites'));
 
 
      }
@@ -65,6 +78,8 @@ class LeadController extends Controller
             'opportunite_id' => 'required|exists:opportunites,id',
 
         ]);
+
+        $user_id = auth()->id();
         $opportuniteId = $request->input('opportunite_id');
 
         // Récupérer le stage ayant le sort le plus petit pour l'opportunité sélectionnée
@@ -77,6 +92,7 @@ class LeadController extends Controller
             'sources_id' => $request->sources_id,
             'opportunite_id' => $opportuniteId,
             'stage_id' => $stageId,
+            'user_id'=>$user_id,
 
         ]);
 
@@ -188,19 +204,44 @@ public function supprimerlead($id)
     // Redirect with a success message
     return redirect()->route('pageleads')->with('success', 'Lead a été supprimeé avec succès!');
  }
-public function movelead(Request $request, Lead $lead)
-{
-    // Validate the request data if necessary
-    $request->validate([
-        'stage_id' => 'required|exists:stages,id', // Assuming stages table has an 'id' column
-    ]);
 
-    // Update the lead's stage
-    $lead->stage_id = $request->input('stage_id');
-    $lead->save();
 
-    // Redirect back or return a response as needed
-    return redirect()->back()->with('success', 'le stage e lead a été mis a jour avec succès.')->with('scrollToDiv', 'suivileads');
-}
+    public function movelead(Request $request, Lead $lead)
+ {
+     // Validate the request data if necessary
+     $request->validate([
+         'stage_id' => 'required|exists:stages,id', // Assuming stages table has an 'id' column
+     ]);
+
+     // Update the lead's stage
+     $lead->stage_id = $request->input('stage_id');
+     $lead->save();
+
+     // Check if there is at least one active workflow with the event 'LeadWon'
+     $workflowWon = Workflow::where('event', 'LeadWon')
+                            ->where('status', 'active')
+                            ->first();
+
+     // Check if the new stage ID is 5 and there is an active workflow with the event 'LeadWon'
+     if ($lead->stage_id == 5 && $workflowWon) {
+         // Dispatch the LeadWon event
+         LeadWon::dispatch($lead);
+     }
+
+     // Check if there is at least one active workflow with the event 'LeadLost'
+     $workflowLost = Workflow::where('event', 'LeadLost')
+                             ->where('status', 'active')
+                             ->first();
+
+     // Check if the new stage ID is 6 and there is an active workflow with the event 'LeadLost'
+     if ($lead->stage_id == 6 && $workflowLost) {
+         // Dispatch the LeadLost event
+         LeadLost::dispatch($lead);
+     }
+
+     // Redirect back or return a response as needed
+     return redirect()->back()->with('success', 'Le stage du lead a été mis à jour avec succès.')->with('scrollToDiv', 'suivileads');
+ }
+
 
 }

@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\LeadWon;
+use App\Events\LeadLost;
 use App\Events\LeadUpdate;
 use App\Events\LeadCreated;
+use App\Listeners\SendLeadWon;
+use App\Listeners\SendLeadLost;
 use App\Listeners\SendLeadUpdate;
 use App\Listeners\SendLeadCreated;
 use Illuminate\Support\Facades\Event;
@@ -34,5 +38,15 @@ class AppServiceProvider extends ServiceProvider
             LeadUpdate::class,
             SendLeadUpdate::class
         );
+
+        Event::listen(
+            LeadWon::class,
+             SendLeadWon::class
+            );
+
+        Event::listen(
+            LeadLost::class,
+                SendLeadLost::class
+            );
     }
 }
