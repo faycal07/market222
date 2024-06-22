@@ -13,7 +13,8 @@ class Product extends Model
         'sku',
         'description',
         'quantite',
-        'prix'
+        'prix',
+
     ];
     public function leads()
     {
