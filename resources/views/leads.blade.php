@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 	@vite('resources/css/app.css')
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 </head>
 
 <body>
@@ -20,6 +21,7 @@
 	<div class="main-container">
 		@include('sidebar')
 		<div class="main " id="main">
+
             @if ($errors->any())
             <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
                 <ul>
@@ -28,6 +30,18 @@
                     @endforeach
                 </ul>
             </div>
+            @endif
+
+            @if (session('error') || $errors->any())
+            <script defer>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var userForm = document.getElementById('user-form');
+                    if (userForm) {
+                        userForm.scrollIntoView({ behavior: 'smooth' });
+                        userForm.classList.remove('hidden');
+                    }
+                });
+            </script>
             @endif
 
             @if (session('success'))
@@ -39,9 +53,11 @@
 
 				<div class="box box1">
 					<div class="text">
-                        @php
-                        $nombreleads = DB::table('leads')->count();
-                        @endphp
+
+                          @php
+                          $user_id = auth()->id();
+                          $nombreleads= DB::table('leads')->where('user_id', $user_id)->count();
+                          @endphp
 						<h2 class="topic-heading">{{$nombreleads}}<h2>
 						<h2 class="topic">Leads</h2>
 					</div>
@@ -77,9 +93,12 @@
 				</div>
                 <div class="box box2">
 					<div class="text">
-                        @php
-                        $nombreopportunites = DB::table('opportunites')->count();
+
+                         @php
+                         $user_id = auth()->id();
+                         $nombreopportunites= DB::table('opportunites')->where('user_id', $user_id)->count();
                          @endphp
+
 						<h2 class="topic-heading">{{$nombreopportunites}}</h2>
 						<h2 class="topic">Opportunitées</h2>
 					</div>
@@ -95,7 +114,7 @@
 
 
 
-			<div class="report-container">
+			<div class="report-container min-w-full">
 				<div class="report-header">
 					<h1 class="recent-Articles">Suivi Leads</h1>
 
@@ -107,47 +126,42 @@
 
 
 
+                    @foreach ($opportunites as $opportunite)
+                    <h2 class="ms-4 underline text-lg font-semibold bg-gray-100 border-2 px-8 w-fit">{{ $opportunite->nom }}</h2>
+                    <div class="flex mb-4 overflow-x-auto">
+                        @foreach ($opportunite->stages as $stage)
+                            <div class="flex-1 p-4 bg-gray-100 border-2">
+                                <h3 class="text-md font-semibold">{{ $stage->nom }}</h3>
+                                <ul class="mt-2 connectedSortable" id="sortable-{{ $stage->id }}">
+                                    @foreach ($opportunite->leads as $lead)
+                                        @if ($lead->stage_id === $stage->id)
+                                            <div class="mb-5">
+                                                <li class="flex flex-row">
+                                                    <div class="mr-5 h-10 w-32 shadow-sm">{{ $lead->nom }} est à {{ $lead->stage->probabilite }}%</div>
+                                                    <form action="{{ route('suivilead', $lead->id) }}" method="post" id="form-{{ $lead->id }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <select name="stage_id"
+                                                                class="h-10 w-auto shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                                                required onchange="submitForm({{ $lead->id }})">
+                                                            <option value="" selected disabled>Deplacer</option>
+                                                            @foreach ($opportunite->stages as $stageOption)
+                                                                <option value="{{ $stageOption->id }}">{{ $stageOption->nom }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </form>
+                                                </li>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
 
-  @foreach ($opportunites_et_leads as $opportunite)
-  <h2 class="ms-4 underline text-lg font-semibold bg-gray-100 border-2 px-8 w-fit">{{ $opportunite->nom }}</h2>
-  <div class="flex mb-4 overflow-x-auto">
-	  @foreach ($opportunite->stages as $stage)
-		  <div class="flex-1 p-4 bg-gray-100 border-2">
-			  <h3 class="text-md font-semibold">{{ $stage->nom }}</h3>
-			  <ul class="mt-2 connectedSortable" id="sortable-{{ $stage->id }}">
-				  @foreach ($stage->leads as $lead)
-					  @if ($lead->opportunite->id === $opportunite->id && $lead->stage->id === $stage->id)
-						  <div class="mb-5">
-							  <li class="flex flex-row">
-								  <div class="mr-5 h-10 w-32 shadow-sm">{{ $lead->nom }} est à {{$lead->stage->probabilite}}%</div>
-								  <form action="{{ route('suivilead', $lead->id) }}" method="post" id="form-{{ $lead->id }}">
-									  @csrf
-									  @method('PUT')
-									  <select name="stage_id"
-									  class="h-10 w-auto shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-									  required onchange="submitForm({{ $lead->id }})">
-										  <option value="" selected disabled>Deplacer</option>
-										  @foreach ($opportunite->stages as $stageOption)
-											  <option value="{{ $stageOption->id }}">{{ $stageOption->nom }}</option>
-										  @endforeach
-									  </select>
-								  </form>
-							  </li>
-						  </div>
-					  @endif
-				  @endforeach
-			  </ul>
-		  </div>
-	  @endforeach
-  </div>
-@endforeach
 
-<script>
-  function submitForm(leadId) {
-	  var form = document.getElementById('form-' + leadId);
-	  form.submit();
-  }
-</script>
+
 
 
 
@@ -155,16 +169,23 @@
 			</div>
 
 
-			<div class="report-container">
+			<div class="report-container min-w-full">
 				<div class="report-header">
 					<h1 class="recent-Articles">Leads</h1>
+
+					<div class="bg-white p-4 rounded-lg">
+                        <div class="relative bg-inherit">
+                            <input type="search" id="leadSearchInput" name="username" onkeyup="searchLeads()" class=" me-28 peer bg-transparent h-8 w-52 md:w-72 rounded-lg text-gray-900 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Rechercher"/>
+                            <label for="leadSearchInput"  class="absolute cursor-text left-2 -top-3 text-sm text-gray-500 bg-white px-1 peer-placeholder-shown:text-center peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">Rechercher</label>
+                        </div>
+                    </div>
 
 					<span class="inline-block bg-sky-900 rounded-full mt-3 px-3 py-1 text-sm font-semibold text-slate-100 mr-2 mb-2 hover:bg-sky-300 hover:text-slate-800">
 
 						<a href="{{route('pageleads')}}#user-form" onclick="scrollToForm()" >Créer Lead</a></span>
 				</div>
 
-                <input type="text" id="leadSearchInput" onkeyup="searchLeads()" placeholder="Rechercher un lead...">
+
 
 
 
@@ -291,7 +312,7 @@
 
 
 
-						<div class="report-container mt-12 pt-8 px-3 hidden" id="user-form">
+              <div id="user-form" class="report-container mt-5 pt-8 px-3 {{ $errors->any() ? '' : 'hidden' }}">
 
 							<div class="form-container max-w-lg mx-auto">
 								<h2 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Lead</h2>
@@ -302,27 +323,51 @@
 										<input type="text" id="nom" name="nom" required
 											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 											placeholder="Nom de Lead">
+                                            @error('nom')
+                                            <div class="text-red-500 text-sm">
+                                                {{$message}}
+                                            </div>
+
+                                            @enderror
 									</div>
 									<div class="mb-5">
 										<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">E-Mail:</label>
 										<input type="email" id="email" name="email" required
 											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 											placeholder="E-Mail">
+                                            @error('email')
+                                            <div class="text-red-500 text-sm">
+                                                {{$message}}
+                                            </div>
+
+                                            @enderror
 									</div>
 									<div class="mb-5">
 										<label for="tel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Téléphone:</label>
 										<input type="number" id="tel" name="tel" required
 											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
 											placeholder="Téléphone">
+                                            @error('tel')
+                                            <div class="text-red-500 text-sm">
+                                                {{$message}}
+                                            </div>
+
+                                            @enderror
 									</div>
 
 									<div class="mb-5">
 										<label for="types_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Type:</label>
 										<select id="types_id" name="types_id" required
-											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
 											<option value="1">Existant</option>
 											<option value="2">Nouveau</option>
 										</select>
+                                        @error('types_id')
+                                        <div class="text-red-500 text-sm">
+                                            {{$message}}
+                                        </div>
+
+                                        @enderror
 									</div>
 									<div class="mb-5">
 										<label for="sources_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Source:</label>
@@ -334,15 +379,27 @@
 											<option value="4">Direct</option>
 											<option value="5">Formulaire</option>
 										</select>
+                                        @error('sources_id')
+                                        <div class="text-red-500 text-sm">
+                                            {{$message}}
+                                        </div>
+
+                                        @enderror
 									</div>
 									<div class="mb-5">
 										<label for="produit_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Produits:</label>
 										<select name="produit_id[]" id="produit_id" multiple required
-											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+											class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" >
 											@foreach ($products as $product)
 											<option value="{{ $product->id }}">{{ $product->nom }}</option>
 											@endforeach
 										</select>
+                                        @error('produit_id')
+                                        <div class="text-red-500 text-sm">
+                                            {{$message}}
+                                        </div>
+
+                                        @enderror
 									</div>
 									<div class="mb-5">
 										<label for="opportunite_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Opportunité:</label>
@@ -352,6 +409,12 @@
 												<option value="{{ $opportunite->id }}">{{ $opportunite->nom }}</option>
 											@endforeach
 										</select>
+                                        @error('opportunite_id')
+                                        <div class="text-red-500 text-sm">
+                                            {{$message}}
+                                        </div>
+
+                                        @enderror
 									</div>
 									<div class="flex items-center justify-center h-16">
 									<button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Créer</button>
@@ -375,6 +438,16 @@
 			</div>
 		</div>
 	</div>
+
+
+    <script>
+        function submitForm(leadId) {
+            var form = document.getElementById('form-' + leadId);
+            form.submit();
+        }
+ </script>
+
+
     <script>
   let scrollToDiv = "{{ session('scrollToDiv') }}";
     if (scrollToDiv) {

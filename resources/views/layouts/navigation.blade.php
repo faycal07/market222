@@ -1,3 +1,4 @@
+
 <nav x-data="{ open: false }" class="bg-white dark:bg-white border-b border-sky-100 dark:border-sky-600">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,6 +10,7 @@
                         <x-application-logo class="p-0 m-0 h-16 w-32 fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div> --}}
+
                 <div class="p-0"><a href="{{ route('dashboard') }}"><img src="/images/logotoudja.png" alt="logo" class="p-0 m-0 h-16 w-32"></a></div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">

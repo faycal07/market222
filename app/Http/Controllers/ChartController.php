@@ -93,8 +93,8 @@ class ChartController extends Controller
 
     public function compagnesChart()
     {
-        $compagnes = Compagne::selectRaw('MONTH(date_limite) as month, COUNT(*) as count')
-            ->whereYear('date_limite', date('Y'))
+        $compagnes = Compagne::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->whereYear('created_at', date('Y'))
             ->groupBy('month')
             ->orderBy('month')
             ->get();

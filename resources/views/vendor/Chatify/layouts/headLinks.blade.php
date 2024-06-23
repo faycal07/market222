@@ -23,6 +23,7 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('css/style.css') }}"rel="stylesheet"/>
 <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" rel="stylesheet"/>
+@vite('resources/css/app.css')
 {{-- Setting messenger primary color to css --}}
 <style>
     :root {

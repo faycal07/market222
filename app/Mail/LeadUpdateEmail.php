@@ -37,6 +37,7 @@ class LeadUpdateEmail extends Mailable
 
         return $this->from($senderEmail)
                     ->subject('Lead Update Notification')
-                    ->view('emailleadupdate');
+                    ->view('emailleadupdate')
+                    ->with(['lead' => $this->lead]);
     }
 }

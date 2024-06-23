@@ -30,43 +30,48 @@ class TemplateController extends Controller
      */
     public function store(Request $request)
     {
-        // Valider les données soumises
         $request->validate([
             'nom' => 'required|string',
             'subject' => 'required|string',
-            'mobile' => 'required|string',
+            'mobile' => ['required', 'regex:/^[\d\+\-\(\)\s]*$/'],
             'web' => 'required|string',
-            'email' => 'required|string',
-            'telephone' => 'required|string',
+            'email' => 'required|email',
+            'telephone' => ['required', 'regex:/^[\d\+\-\(\)\s]*$/'],
             'adresse' => 'required|string',
         ]);
+
+        $user_id = auth()->id();
         try {
+            // Créer un nouveau template avec les données validées
+            $template = new Template([
+                'nom' => $request->nom,
+                'subject' => $request->subject,
+                'mobile' => $request->mobile,
+                'web' => $request->web,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'adresse' => $request->adresse,
+                'user_id' => $user_id,
+            ]);
 
-        // Créer un nouveau template avec les données validées
-        $template = new Template([
-            'nom' => $request->nom,
-            'subject' => $request->subject,
-            'mobile' => $request->mobile,
-            'web' => $request->web,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-            'adresse' => $request->adresse,
-        ]);
+            // Traitement de l'image de la compagne
+            if ($request->hasFile('logo')) {
+                $imagePath = $request->file('logo')->store('public/images');
+                $template->logo = $imagePath;
+            }
 
-         // Traitement de l'image de la compagne
-       if ($request->hasFile('logo')) {
-        $imagePath = $request->file('logo')->store('public/images');
-        $template->logo = $imagePath;
-       }
+            // Sauvegarder le nouveau template
+            $template->save();
 
-        // Sauvegarder le nouveau template
-        $template->save();
-
-        return redirect()->route('emails.index')->with('success', 'Le template a été créée avec succès.');
-    } catch (\Exception $e) {
-        return redirect()->back()->withInput()->with('error', 'Erreur lors de la creation de workflow ' . $e->getMessage());
+            return redirect()->route('emails.index')->with('success', 'Le template a été créé avec succès.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('templateError', 'Erreur lors de la création du template: ' . $e->getMessage())
+                ->withInput();
+        }
     }
-    }
+
+
 
     /**
      * Show the form for editing the specified template.
@@ -90,14 +95,14 @@ class TemplateController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-        'nom' => 'required|string',
-        'subject' => 'required|string',
-        'mobile' => 'required|string',
-        'web' => 'required|string',
-        'email' => 'required|email',
-        'telephone' => 'required|string',
-        'adresse' => 'required|string',
-    ]);
+            'nom' => 'required|string',
+            'subject' => 'required|string',
+            'mobile' => ['required', 'regex:/^[\d\+\-\(\)\s]*$/'], // Utiliser regex pour les numéros de téléphone
+            'web' => 'required|string',
+            'email' => 'required|email', // Valider que c'est un email valide
+            'telephone' => ['required', 'regex:/^[\d\+\-\(\)\s]*$/'], // Utiliser regex pour les numéros de téléphone
+            'adresse' => 'required|string',
+        ]);
 
     if ($validator->fails()) {
         return redirect()->back()->withErrors($validator)->withInput();

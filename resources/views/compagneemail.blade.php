@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modèle de Compagne Marketing par Email pour une Boisson</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('images/logotoudja.png') }}" type="image/x-icon"/>
 </head>
 <body style="background-color: #f9fafb; padding: 20px; font-family: Arial, sans-serif;">
 
@@ -13,7 +14,7 @@
         @if(isset($compagne))
             <!-- Logo Section -->
             <div class="logo-section bg-white p-6 text-center">
-                <img src="{{ asset('/images/logotoudja.png') }}" alt="logo" class="mx-auto h-24 sm:h-32 lg:h-44 w-auto">
+                <img src="{{ asset('images/logotoudja.png') }}" alt="logo" class="mx-auto h-24 sm:h-32 lg:h-44 w-auto">
             </div>
 
             <!-- Subject Section -->

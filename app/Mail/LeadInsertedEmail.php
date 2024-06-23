@@ -35,6 +35,7 @@ class LeadInsertedEmail extends Mailable
 
         return $this->from($senderEmail)
                     ->subject('Lead create Notification')
-                    ->view('emailleadcreated');
+                    ->view('emailleadcreated')
+                    ->with(['lead' => $this->lead]);
     }
 }

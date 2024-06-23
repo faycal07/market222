@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modèle de Compagne Marketing par Email pour une Boisson</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 
 </head>
 <body style="background-color: #f9fafb; padding: 20px; font-family: Arial, sans-serif;">
@@ -30,7 +31,7 @@
 
             <!-- Text Section -->
             <div class="text-section py-6 bg-white">
-                <p class="text-lg leading-loose text-gray-700">Vos informations ont été mises à jour dans nos bases de données SARL SPC GB equipe TOUDJA</p>
+                <p class="text-lg leading-loose text-gray-700"> Mr. {{ $lead->nom }} Vos informations ont été mises à jour dans nos bases de données SARL SPC GB equipe TOUDJA</p>
             </div>
 
             <!-- Company Information Section -->

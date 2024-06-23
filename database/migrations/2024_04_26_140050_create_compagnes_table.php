@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slogan')->nullable();
             $table->string('text_compagne')->nullable();;
-            $table->string('leads');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('image')->nullable();
             $table->date('date_limite');
             $table->timestamps();

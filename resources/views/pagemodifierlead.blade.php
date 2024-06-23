@@ -11,8 +11,8 @@
 	<title>Modifier Lead</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-
 	@vite('resources/css/app.css')
+    <link rel="icon" href="{{asset('images/logotoudja.png')}}" type="image/x-icon"/>
 </head>
 
 <body>
@@ -23,15 +23,7 @@
         @include('sidebar')
 		<div class="main">
 
-            @if ($errors->any())
-            <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+
 
             @if (session('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
@@ -54,18 +46,39 @@
                                 <input type="text" id="nom" name="nom" value="{{$lead->nom}}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="Nom de Lead">
+
+                                @error('nom')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">E-Mail:</label>
                                 <input type="email" id="email" name="email" value="{{$lead->email}}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="E-Mail">
+
+                                @error('email')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="tel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Téléphone:</label>
                                 <input type="number" id="tel" name="tel" value="{{$lead->tel}}" required
                                     class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="Téléphone">
+
+                                @error('tel')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="types_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Type:</label>
@@ -74,6 +87,14 @@
                                     <option value="1" @if($lead->types_id == '1') selected @endif>Existant</option>
                                     <option value="2" @if($lead->types_id == '2') selected @endif>Nouveau</option>
                                 </select>
+
+
+                                @error('types_id')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="sources_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Source:</label>
@@ -85,6 +106,13 @@
                                     <option value="4" @if($lead->sources_id == '4') selected @endif>Direct</option>
                                     <option value="5" @if($lead->sources_id == '5') selected @endif>Formulaire</option>
                                 </select>
+
+                                @error('sources_id')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
                             <div class="form-group mb-5">
                                 <label for="produit_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Produits:</label>
@@ -94,6 +122,13 @@
                                     <option value="{{ $product->id }}" @if(in_array($product->id, $lead->products->pluck('id')->toArray())) selected @endif>{{ $product->nom }}</option>
                                     @endforeach
                                 </select>
+
+                                @error('produit_id[]')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
 
 
@@ -107,12 +142,19 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('opportunite_id')
+                                <div class="text-red-500 text-sm">
+                                    {{$message}}
+                                </div>
+
+                                @enderror
                             </div>
 
                             <div class="flex items-center justify-center h-16">
                                 <button type="submit"
                                     class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5">Modifier</button>
-                            </div>
+                                    <a href="{{route('pageleads')}}" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+                                </div>
                         </form>
                     </div>
                 </div>
