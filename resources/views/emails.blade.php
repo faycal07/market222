@@ -61,7 +61,32 @@
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
 
+            <nav class="bg-sky-950 p-2 shadow-md mb-5 rounded-2xl">
+                <div class="container mx-auto flex flex-wrap items-center justify-between">
+                    <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
+                        <img src="{{ asset('/images/menutel.png') }}" alt="menu" class="w-6 h-6">
+                    </button>
+                    {{-- <div class="hidden w-full lg:flex lg:flex-col lg:flex-grow lg:w-auto px-3" id="nav-contenttt">
+                        <div class="lg:inline-flex lg:flex-row lg:items-end lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+                            <a href="#emailSection" class="hover:bg-sky-500 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white hover:text-gray-300">E-Mails</a>
+                            <a href="#templateSection" class="hover:bg-sky-500 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white hover:text-gray-300">Templates</a>
+                            <a href="#user-form" onclick="scrollToForm()" class="hover:bg-sky-500 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white hover:text-gray-300">Créer E-Mails</a>
+                            <a href="#template-form" onclick="scrollToFormm()" class="hover:bg-sky-500 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white hover:text-gray-300">Créer Templates</a>
+                        </div>
+                    </div> --}}
+                    <div class="hidden w-full lg:flex lg:flex-col lg:flex-grow lg:w-auto px-3" id="nav-contenttt">
+                        <div class="lg:inline-flex lg:flex-row lg:items-end lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+                            <a href="#emailSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">E-Mails</a>
+                            <a href="#templateSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Templates</a>
+                            <a href="#user-form" onclick="scrollToForm()" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Créer E-Mails</a>
+                            <a href="#template-form" onclick="scrollToFormm()" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Créer Templates</a>
+                        </div>
+                    </div>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                 <nav class="bg-nav p-2 shadow-md mb-5 rounded-2xl">
                     <div class="container mx-auto flex flex-wrap items-center justify-between">
                         <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
@@ -81,6 +106,11 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                 </div>
             </nav>
 
@@ -310,7 +340,15 @@
                       <label for="to" class="text-sm font-medium mb-1">À :</label>
                       <input type="email" id="to" name="to" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                       @error('to')
+<<<<<<< HEAD
                       <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                      <div class="text-red-500 text-sm">
+=======
+                      <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                           {{$message}}
                       </div>
 
@@ -321,7 +359,15 @@
                       <label for="subject" class="text-sm font-medium mb-1">Objet :</label>
                       <input type="text" id="subject" name="subject" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                       @error('subject')
+<<<<<<< HEAD
                       <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                      <div class="text-red-500 text-sm">
+=======
+                      <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                           {{$message}}
                       </div>
 
@@ -332,7 +378,15 @@
                       <label for="body" class="text-sm font-medium mb-1">Message :</label>
                       <textarea id="body" name="body" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"></textarea>
                       @error('body')
+<<<<<<< HEAD
                       <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                      <div class="text-red-500 text-sm">
+=======
+                                    <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                         {{$message}}
                                     </div>
 
@@ -391,75 +445,184 @@
                     @csrf
                     <div class="flex flex-col">
                         <label for="nom" class="text-sm font-medium mb-1">Nom du template :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="text" id="nom" name="nom" value="{{ old('nom') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('nom')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="text" id="nom" name="nom" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('nom')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="subject" class="text-sm font-medium mb-1">Objet du template :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="text" id="subject" name="subject" value="{{ old('subject') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('subject')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="text" id="subject" name="subject" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('subject')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="mobile" class="text-sm font-medium mb-1">Contenu mobile du template :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="text" id="mobile" name="mobile" value="{{ old('mobile') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('mobile')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="text" id="mobile" name="mobile" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('mobile')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="web" class="text-sm font-medium mb-1">Contenu web du template :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="text" id="web" name="web" value="{{ old('web') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('web')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="text" id="web" name="web" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('web')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="email" class="text-sm font-medium mb-1">E-mail :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="email" id="email" name="email" value="{{ old('email') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('email')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="email" id="email" name="email" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('email')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="telephone" class="text-sm font-medium mb-1">Contenu téléphone du template :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="text" id="telephone" name="telephone" value="{{ old('telephone') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('telephone')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="text" id="telephone" name="telephone" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('telephone')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
                         <label for="adresse" class="text-sm font-medium mb-1">Contenu adresse du template :</label>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <input type="text" id="adresse" name="adresse" value="{{ old('adresse') }}" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('adresse')
                         <div class="text-red-500 text-sm">
                             {{ $message }}
                         </div>
+<<<<<<< HEAD
+=======
+=======
+                        <input type="text" id="adresse" name="adresse" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('adresse')
+                        <div>
+                            {{$message}}
+                        </div>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @enderror
                     </div>
 
                     <div class="flex flex-col">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <label for="logo" class="text-sm font-medium mb-1">Logo du template :</label>
                         <input type="file" id="logo" name="logo" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                         @error('logo')
@@ -468,7 +631,24 @@
                         </div>
                         @enderror
                     </div>
+<<<<<<< HEAD
 
+=======
+
+=======
+						<label for="logo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Logo de l'entreprise</label>
+						<input type="file" id="logo" name="logo" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                        @error('logo')
+                        <div>
+                            {{$message}}
+                        </div>
+
+                        @enderror
+					</div>
+
+                    <!-- Boutons de soumission -->
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                     <div class="text-center">
                         <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Créer</button>
                         <a href="#" onclick="scrollToStartt()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>

@@ -26,7 +26,15 @@
 	<div class="main-container sm:flex md:flex">
 		@include('sidebar')
         <div class="main">
+<<<<<<< HEAD
             <nav class="bg-nav p-2 shadow-md mb-5 rounded-2xl">
+=======
+<<<<<<< HEAD
+            <nav class="bg-nav p-2 shadow-md mb-5 rounded-2xl">
+=======
+            <nav class="bg-sky-950 p-2 shadow-md mb-5 rounded-2xl">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                 <div class="container mx-auto flex flex-wrap items-center justify-between">
                     <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
 
@@ -37,8 +45,18 @@
                     $user_role = auth()->user()->role;
                 @endphp
 
+<<<<<<< HEAD
                 <div class="hidden w-full lg:flex md:flex-col md:flex-grow md:w-auto px-3" id="nav-contenttt" data-user-role="{{ $user_role }}">
                     <div class="md:inline-flex md:flex-wrap md:flex-row md:items-stretch md:w-auto w-full items-start flex flex-col md:h-auto space-x-0">
+=======
+<<<<<<< HEAD
+                <div class="hidden w-full lg:flex md:flex-col md:flex-grow md:w-auto px-3" id="nav-contenttt" data-user-role="{{ $user_role }}">
+                    <div class="md:inline-flex md:flex-wrap md:flex-row md:items-stretch md:w-auto w-full items-start flex flex-col md:h-auto space-x-0">
+=======
+                <div class="hidden w-full lg:flex lg:flex-col lg:flex-grow lg:w-auto px-3" id="nav-contenttt" data-user-role="{{ $user_role }}">
+                    <div class="lg:inline-flex lg:flex-row lg:items-stretch lg:ml-1 lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <a href="#userSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Utilisateurs</a>
                         <a href="#userSectionarchiver" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Archives</a>
                         <a href="#opportunitySection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Opportunités</a>
@@ -47,6 +65,14 @@
                         <a href="#workflowSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Workflows</a>
                         <a href="#productSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Produits</a>
                         <a href="#Statistiques" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Statistiques</a>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+                    </div>
+                    <div class="lg:inline-flex lg:flex-row lg:items-stretch lg:ml-1 lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         <a href="#leadChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Leads</a>
                         <a href="#stagesChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Stages</a>
                         <a href="#compagnesChart" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Graphe Compagne</a>
@@ -74,7 +100,15 @@
                 ['title' => 'Graphique des produits selon la demande', 'id' => 'productLeadsChart'],
                 ['title' => 'Graphique des emails', 'id' => 'emailsChart'],
             ] as $chart)
+<<<<<<< HEAD
                 <div class="bg-blue-200 rounded-lg shadow-md chart-item" data-chart-id="{{ $chart['id'] }}">
+=======
+<<<<<<< HEAD
+                <div class="bg-blue-200 rounded-lg shadow-md chart-item" data-chart-id="{{ $chart['id'] }}">
+=======
+                <div class="bg-white rounded-lg shadow-md chart-item" data-chart-id="{{ $chart['id'] }}">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                     <h2 class="text-lg font-semibold text-center py-4">{{ $chart['title'] }}</h2>
                     <div class="h-72">
                         <canvas id="{{ $chart['id'] }}" class="w-full h-full"></canvas>

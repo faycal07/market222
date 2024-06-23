@@ -39,6 +39,7 @@ class TemplateController extends Controller
             'telephone' => ['required', 'regex:/^[\d\+\-\(\)\s]*$/'],
             'adresse' => 'required|string',
         ]);
+<<<<<<< HEAD
 
         $user_id = auth()->id();
         try {
@@ -54,11 +55,45 @@ class TemplateController extends Controller
                 'user_id' => $user_id,
             ]);
 
+=======
+
+        $user_id = auth()->id();
+        try {
+            // Créer un nouveau template avec les données validées
+            $template = new Template([
+                'nom' => $request->nom,
+                'subject' => $request->subject,
+                'mobile' => $request->mobile,
+                'web' => $request->web,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+                'adresse' => $request->adresse,
+                'user_id' => $user_id,
+            ]);
+
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
             // Traitement de l'image de la compagne
             if ($request->hasFile('logo')) {
                 $imagePath = $request->file('logo')->store('public/images');
                 $template->logo = $imagePath;
             }
+<<<<<<< HEAD
+=======
+=======
+        // Créer un nouveau template avec les données validées
+        $template = new Template([
+            'nom' => $request->nom,
+            'subject' => $request->subject,
+            'mobile' => $request->mobile,
+            'web' => $request->web,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+            'user_id'=>$user_id,
+        ]);
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
 
             // Sauvegarder le nouveau template
             $template->save();

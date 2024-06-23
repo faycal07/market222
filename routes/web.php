@@ -56,7 +56,15 @@ Route::middleware('auth')->group(function () {
     });
 
 
+<<<<<<< HEAD
     // Route::middleware([MarketingMiddleware::class])->group(function () {
+=======
+<<<<<<< HEAD
+    // Route::middleware([MarketingMiddleware::class])->group(function () {
+=======
+    Route::middleware([MarketingMiddleware::class])->group(function () {
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
 
          // Routes pour la gestion des opportunitees
         Route::get('/opportunites', [OpportuniteController::class, 'index'])->name('opportunites.index');
@@ -89,6 +97,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/creercompagne', [CompagneController::class, 'store'])->name('creercompagne');
         Route::put('/modifiercompagne/{id}', [CompagneController::class, 'update'])->name('modifiercompagne');
         Route::delete('/supprimercompagne/{id}', [CompagneController::class, 'delete'])->name('deletecompagne');
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
 
 
       // Route pour partager une compagne sur Facebook
@@ -98,6 +110,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/envoyersms/{id}', [SmsController::class, 'sendsms'])->name('sms.envoyer');
 
 
+<<<<<<< HEAD
        // Routes de la gestion des workflows
         Route::get('/workflows', [WorkflowController::class, 'index'])->name('workflows.index');
         Route::post('/workflows', [WorkflowController::class, 'store'])->name('workflows.store');
@@ -106,6 +119,31 @@ Route::middleware('auth')->group(function () {
         Route::put('/workflows/{id}', [WorkflowController::class, 'update'])->name('workflows.update');
 
     // });
+=======
+=======
+        Route::get('/compagnes/share/{id}', [CompagneController::class, 'share'])->name('compagnes.share');
+
+      // Route pour partager une compagne sur Facebook
+        Route::get('/compagnes/{id}', [CompagneController::class, 'shareOn'])->name('compagnes.share');
+
+      // Route pour partager une compagne par sms
+        Route::get('/envoyersms/{id}', [SmsController::class, 'sendsms'])->name('sms.envoyer');
+
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+       // Routes de la gestion des workflows
+        Route::get('/workflows', [WorkflowController::class, 'index'])->name('workflows.index');
+        Route::post('/workflows', [WorkflowController::class, 'store'])->name('workflows.store');
+        Route::delete('/workflows/{id}', [WorkflowController::class, 'delete'])->name('workflows.delete');
+        Route::get('/modifierworkflow{id}', [WorkflowController::class, 'pagemodifier'])->name('modifierworkflows.index');
+        Route::put('/workflows/{id}', [WorkflowController::class, 'update'])->name('workflows.update');
+
+<<<<<<< HEAD
+    // });
+=======
+    });
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
 
 
     // Routes pour  la gestion d'emails

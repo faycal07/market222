@@ -27,6 +27,22 @@
 		<div class="main" >
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+            @if ($errors->any())
+            <div class="bg-red-200 text-red-800 p-4 mb-4 message error auto-dismiss">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
             @if (session('success'))
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
@@ -46,7 +62,15 @@
               <label for="compagne_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Titre de la Compagne</label>
               <input type="text" id="compagne_title" name="compagne_title" placeholder="Titre de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" value="{{ $compagne->title }}">
               @error('compagne_title')
+<<<<<<< HEAD
               <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+              <div class="text-red-500 text-sm">
+=======
+              <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                   {{$message}}
               </div>
 
@@ -58,7 +82,15 @@
               <label for="compagne_slogan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Slogan de la Compagne</label>
               <input type="text"  id="compagne_slogan" name="compagne_slogan" placeholder="Slogan de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"value="{{ $compagne->slogan }}">
               @error('compagne_slogan')
+<<<<<<< HEAD
               <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+              <div class="text-red-500 text-sm">
+=======
+              <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                   {{$message}}
               </div>
 
@@ -70,7 +102,15 @@
               <label for="text_compagne" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Texte de la Compagne</label>
               <textarea id="text_compagne" name="text_compagne" rows="4" placeholder="Texte de la Compagne" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">{{ $compagne->text_compagne }}</textarea>
               @error('text_compagne')
+<<<<<<< HEAD
               <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+              <div class="text-red-500 text-sm">
+=======
+              <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                   {{$message}}
               </div>
 
@@ -82,7 +122,15 @@
               <label for="compagne_image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Image</label>
               <input type="file" id="compagne_image" name="compagne_image" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
               @error('compagne_image')
+<<<<<<< HEAD
               <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+              <div class="text-red-500 text-sm">
+=======
+              <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                   {{$message}}
               </div>
 
@@ -94,7 +142,15 @@
               <label for="compagne_date_limite" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Date Limite</label>
               <input type="date" id="compagne_date_limite" name="compagne_date_limite" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" value="{{ $compagne->date_limite }}">
               @error('compagne_date_limite')
+<<<<<<< HEAD
               <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+              <div class="text-red-500 text-sm">
+=======
+              <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                   {{$message}}
               </div>
 
@@ -116,7 +172,15 @@
               </select>
 
               @error('lead_option')
+<<<<<<< HEAD
               <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+              <div class="text-red-500 text-sm">
+=======
+              <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                   {{$message}}
               </div>
 
@@ -173,7 +237,15 @@
             <!-- Boutons de soumission -->
             <div class="text-center">
               <button type="submit" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Modifier</button>
+<<<<<<< HEAD
               <a href="{{route('compagnes.index')}}" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+=======
+<<<<<<< HEAD
+              <a href="{{route('compagnes.index')}}" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+=======
+              <a href="#" onclick="scrollToStart()" class="text-white bg-gradient-to-br from-red-400 to-purple-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Annuler</a>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
 
             </div>
           </form>

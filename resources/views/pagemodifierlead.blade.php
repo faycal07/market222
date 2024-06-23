@@ -48,7 +48,15 @@
                                     placeholder="Nom de Lead">
 
                                 @error('nom')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 
@@ -61,7 +69,15 @@
                                     placeholder="E-Mail">
 
                                 @error('email')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 
@@ -74,7 +90,15 @@
                                     placeholder="Téléphone">
 
                                 @error('tel')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 
@@ -90,7 +114,15 @@
 
 
                                 @error('types_id')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 
@@ -108,7 +140,15 @@
                                 </select>
 
                                 @error('sources_id')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 
@@ -124,7 +164,15 @@
                                 </select>
 
                                 @error('produit_id[]')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 
@@ -143,7 +191,15 @@
                                     @endforeach
                                 </select>
                                 @error('opportunite_id')
+<<<<<<< HEAD
                                 <div class="text-red-500 text-sm">
+=======
+<<<<<<< HEAD
+                                <div class="text-red-500 text-sm">
+=======
+                                <div>
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                                     {{$message}}
                                 </div>
 

@@ -40,6 +40,10 @@
             <div class="bg-green-200 text-green-800 p-4 mb-4 message success auto-dismiss">{{ session('success') }}</div>
             @endif
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
              <nav class="bg-nav p-2 shadow-md mb-5 rounded-2xl">
                 <div class="container mx-auto flex flex-wrap items-center justify-between">
                     <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
@@ -47,6 +51,17 @@
                         <img src="{{asset('/images/menutel.png')}}" alt="menu" class="w-6 h-6">
                     </button>
 
+<<<<<<< HEAD
+=======
+=======
+             <nav class="bg-sky-950 p-2 shadow-md mb-5 rounded-2xl">
+                <div class="container mx-auto flex flex-wrap items-center justify-between">
+                    <button class="text-white inline-flex p-3 hover:bg-gray-700 rounded-2xl lg:hidden ml-auto" id="nav-toggle">
+                        <img src="{{ asset('/images/menutel.png') }}" alt="menu" class="w-6 h-6">
+                    </button>
+
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                     <div class="hidden w-full lg:flex lg:flex-col lg:flex-grow lg:w-auto px-3" id="nav-contenttt">
                         <div class="lg:inline-flex lg:flex-row lg:items-end lg:w-auto w-full items-start flex flex-col lg:h-auto space-x-0">
                             <a href="#userSection" class="hover:bg-sky-200 hover:text-gray-800 hover:scale-110 transform transition duration-200 lg:inline-flex lg:w-auto w-full px-3 py-2 rounded text-white">Utilisateurs</a>
@@ -252,10 +267,23 @@
 
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
             <div id="user-form" class="report-container mt-5 pt-8 px-3 {{ $errors->any() ? '' : 'hidden' }}">
                 <div class="form-container max-w-lg mx-auto">
                     <h2 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Utilisateur</h2>
                     <form action="{{ route('creeruser') }}" method="POST" class="user-form" id="user-form1" enctype="multipart/form-data" >
+<<<<<<< HEAD
+=======
+=======
+            <div id="user-form" class="report-container mt-5 pt-8 px-3 hidden">
+                <div class="form-container max-w-lg mx-auto">
+                    <h2 class="max-w-lg text-3xl font-semibold leading-normal text-gray-700 dark:text-slate-500 text-center py-3">Créer Utilisateur</h2>
+                    <form action="{{ route('creeruser') }}" method="POST" class="user-form" id="user-form1" enctype="multipart/form-data" onsubmit="return validateForm()">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                         @csrf
                         <div class="form-group mb-5">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Nom d'utilisateur:</label>
@@ -270,7 +298,15 @@
                         <div class="form-group mb-5">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-slate-500">Email:</label>
                             <span id="email-error" class="text-red-500 text-sm"></span>
+<<<<<<< HEAD
                             <input type="text" id="email" name="email" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Email">
+=======
+<<<<<<< HEAD
+                            <input type="text" id="email" name="email" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Email">
+=======
+                            <input type="email" id="email" name="email" required class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-sky-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Email">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                             @error('email')
                             <div class="text-red-500 text-sm">
                                 {{$message}}
@@ -387,6 +423,10 @@ function searchUsers(inputId, tableBodyId, rowClass) {
     </script>
 
 <script>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
     document.addEventListener("DOMContentLoaded", function() {
         let scrollToDiv = "{{ session('scrollToDiv') }}";
         console.log("Scroll to div selector:", scrollToDiv);
@@ -401,6 +441,35 @@ function searchUsers(inputId, tableBodyId, rowClass) {
             }
         }
     });
+<<<<<<< HEAD
+=======
+=======
+    function validateForm() {
+        let isValid = true;
+
+        let password = document.getElementById('password').value;
+        let passwordConfirmation = document.getElementById('password_confirmation').value;
+        let passwordError = document.getElementById('password-error');
+        let passwordConfirmationError = document.getElementById('password_confirmation-error');
+
+        // Clear previous errors
+        passwordError.textContent = '';
+        passwordConfirmationError.textContent = '';
+
+        if (password.length < 8) {
+            passwordError.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+            isValid = false;
+        }
+
+        if (password !== passwordConfirmation) {
+            passwordConfirmationError.textContent = 'Les mots de passe ne correspondent pas.';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
 </script>
 
 	<script src="{{ asset('js/index.js')}}"></script>

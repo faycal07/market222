@@ -4,7 +4,15 @@
 <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 <link rel="stylesheet" href="{{ asset('css/fontawesome-free-6.5.2-web/css/all.min.css') }}">
 
+<<<<<<< HEAD
 <header class="bg-nav text-white p-4 flex justify-between items-center ">
+=======
+<<<<<<< HEAD
+<header class="bg-nav text-white p-4 flex justify-between items-center ">
+=======
+<header class="bg-sky-950 text-white p-4 flex justify-between items-center">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
     <div class="flex items-center space-x-10 mx-0">
         <a href="{{ route('dashboard') }}"><img src="/images/logotoudja.png" alt="logo" class="h-16 w-32"></a>
         <img src="/images/menu.png" class="icn menuicn ml-4 h-6 w-7 cursor-pointer" id="menuicn" alt="menu-icon">
@@ -39,7 +47,15 @@
                 <span class="bottom-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
             </div>
 
+<<<<<<< HEAD
             <div class="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-sky-950 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" id="dropdown-menu">
+=======
+<<<<<<< HEAD
+            <div class="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-sky-950 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" id="dropdown-menu">
+=======
+            <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" id="dropdown-menu">
+>>>>>>> a8a1fd77e23340091c1dcb3ad0a16664bab63d19
+>>>>>>> e87245b674945d1c900369974ce08a2c3b35d22e
                 <div class="py-1" role="none">
                     <x-responsive-nav-link :href="route('profile.edit')">
                         {{ __('Profile') }}
